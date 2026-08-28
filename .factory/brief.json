@@ -1,0 +1,9 @@
+{
+  "slug": "stock-return-trail",
+  "title": "Stock Return Trail",
+  "summary": "Return unused job stock to its saved origin.",
+  "artifact_class": "pwa-offline",
+  "smallest_useful_product": "Offline mobile PWA with scan-out to a job/location, a job-closeout screen that proposes each item's origin, partial-use counts, and a CSV movement log.",
+  "monetization": "one-time",
+  "success_measure": "80% of returns recorded at closeout and median field-kit reconciliation below ten minutes."
+}
