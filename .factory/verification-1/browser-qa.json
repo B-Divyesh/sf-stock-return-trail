@@ -1,0 +1,223 @@
+{
+  "url": "https://stock-return-trail.sociobot.in",
+  "pages": {
+    "/": {
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "h1": 1,
+      "main": 1
+    },
+    "/demo": {
+      "status": 200,
+      "title": "Demo — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    },
+    "/app": {
+      "status": 200,
+      "title": "Jobs — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    },
+    "/log": {
+      "status": 200,
+      "title": "Movement log — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    },
+    "/settings": {
+      "status": 200,
+      "title": "Backup and license — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    },
+    "/privacy": {
+      "status": 200,
+      "title": "Privacy — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    },
+    "/terms": {
+      "status": 200,
+      "title": "Terms — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    },
+    "/missing-route": {
+      "status": 200,
+      "title": "Page not found — Stock Return Trail",
+      "h1": 1,
+      "main": 1
+    }
+  },
+  "axe": {
+    "/": [],
+    "/demo": [],
+    "/app": [],
+    "/privacy": []
+  },
+  "keyboard": {
+    "firstFocus": {
+      "text": "Skip to main content",
+      "cls": "skip-link"
+    },
+    "skipTarget": "main"
+  },
+  "workflow": {
+    "demoBanner": "Demo — sample data, nothing is saved\nReset demo\nStart for real",
+    "overMaxValidation": {
+      "message": "Enter a whole number from 0 to 6.",
+      "focused": true,
+      "returnText": "0"
+    },
+    "closedHeading": "Return trail saved\n\nThe movement log now includes used and returned counts.\n\nOpen trail log",
+    "logRows": 8,
+    "realEmpty": "＋\nNo jobs are on the trail\n\nCreate a job, then add stock as it leaves its origin.\n\nCreate your first job",
+    "realCreated": "Boiler annex",
+    "zeroQuantity": {
+      "message": "Value must be greater than or equal to 1.",
+      "valid": false
+    },
+    "realStock": "PIP-12\nPipe section\n3 sent out\nMain store · R2\nused of 3 Pipe section\n3\nto Main store · R2"
+  },
+  "mobile": {
+    "viewport": {
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    "undersized": [
+      {
+        "name": "Reset demo",
+        "w": 84,
+        "h": 30
+      },
+      {
+        "name": "Start for real",
+        "w": 93,
+        "h": 18
+      },
+      {
+        "name": "Stock Return Trail",
+        "w": 159,
+        "h": 39
+      },
+      {
+        "name": "Jobs",
+        "w": 37,
+        "h": 40
+      },
+      {
+        "name": "Privacy",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "name": "Terms",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "name": "Backup & license",
+        "w": 122,
+        "h": 20
+      }
+    ],
+    "targets": [
+      {
+        "name": "Skip to main content",
+        "w": 177,
+        "h": 44
+      },
+      {
+        "name": "Reset demo",
+        "w": 84,
+        "h": 30
+      },
+      {
+        "name": "Start for real",
+        "w": 93,
+        "h": 18
+      },
+      {
+        "name": "Stock Return Trail",
+        "w": 159,
+        "h": 39
+      },
+      {
+        "name": "Jobs",
+        "w": 37,
+        "h": 40
+      },
+      {
+        "name": "Create job",
+        "w": 350,
+        "h": 48
+      },
+      {
+        "name": "Riverside pump room\nClosed",
+        "w": 220,
+        "h": 72
+      },
+      {
+        "name": "used-line-valve",
+        "w": 76,
+        "h": 48
+      },
+      {
+        "name": "used-line-cable",
+        "w": 76,
+        "h": 48
+      },
+      {
+        "name": "used-line-clips",
+        "w": 76,
+        "h": 48
+      },
+      {
+        "name": "Open trail log",
+        "w": 147,
+        "h": 48
+      },
+      {
+        "name": "Privacy",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "name": "Terms",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "name": "Backup & license",
+        "w": 122,
+        "h": 20
+      }
+    ]
+  },
+  "reducedMotion": {
+    "reduce": true,
+    "heroAnimation": "1e-05s",
+    "bodyTransition": "1e-05s"
+  },
+  "serviceWorker": {
+    "beforeOffline": {
+      "controller": true,
+      "registrations": [
+        {
+          "scope": "https://stock-return-trail.sociobot.in/",
+          "active": "activated"
+        }
+      ],
+      "caches": [
+        "stock-return-trail-v3"
+      ]
+    },
+    "offlineReload": {
+      "status": 200,
+      "h1": "Track stock out and back",
+      "offlineMessage": "You are offline. Saved records still work."
+    }
+  },
+  "consoleErrors": []
+}

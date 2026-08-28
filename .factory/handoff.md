@@ -1,4 +1,27 @@
-# Stock Return Trail v1 handoff
+# Stock Return Trail v1 handoff — **FAIL (independent verification 1)**
+
+> Verification on 2026-08-28 of commit
+> `2093f33ed6abffac398a11c775ccb8ccd9d8ee0b` and
+> https://stock-return-trail.sociobot.in found release-blocking defects. This
+> candidate must not ship. See `.factory/verification-1.md` for exact evidence.
+
+## Independent-verification outcome
+
+- All eight required claim tests and the 11-test Playwright suite passed; the
+  production build passes and the live deployment is byte-identical to the
+  candidate for 20 public assets.
+- `npm run test:unit` fails because Vitest runs the Playwright test files.
+- The advertised £19 Sociobot checkout returns HTTP 404.
+- A structurally malformed JSON import replaces the existing local database
+  then makes the Jobs workspace unable to open.
+- Whitespace-only names/codes/origins are accepted, core 390 px demo controls
+  are smaller than 44 px, and live hashed assets are only cached for 30 seconds.
+
+Repair these issues and obtain a new independent report before release.
+
+---
+
+# Builder handoff (superseded by the verification result above)
 
 ## What was built
 

@@ -1,0 +1,375 @@
+{
+  "total": 60,
+  "counts": {
+    "200": 30,
+    "429": 30
+  },
+  "first429": {
+    "i": 2,
+    "status": 429,
+    "retryAfter": "4",
+    "body": "Too Many Requests! Wait for 4s"
+  },
+  "results": [
+    {
+      "i": 1,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 2,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 3,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 4,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 5,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 6,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 7,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 8,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 9,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 10,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 11,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 12,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 13,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 14,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 15,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 16,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 17,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 18,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 19,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 20,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 21,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 22,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 23,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 24,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 25,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 26,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 27,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 28,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 29,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 30,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 31,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 32,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 33,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 34,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 35,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 36,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 37,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 38,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 39,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 40,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 41,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 42,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 43,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 44,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 45,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 46,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 47,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 48,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 49,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 50,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 51,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 52,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 53,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 54,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 55,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 56,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 57,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 58,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    },
+    {
+      "i": 59,
+      "status": 200,
+      "retryAfter": null,
+      "body": "{\"expires_at\":null,\"reason\":\"invalid\",\"valid\":false}"
+    },
+    {
+      "i": 60,
+      "status": 429,
+      "retryAfter": "4",
+      "body": "Too Many Requests! Wait for 4s"
+    }
+  ]
+}

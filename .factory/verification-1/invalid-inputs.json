@@ -1,0 +1,19 @@
+{
+  "whitespaceJob": {
+    "url": "https://stock-return-trail.sociobot.in/app",
+    "dialogOpen": false,
+    "jobTitle": "",
+    "error": ""
+  },
+  "whitespaceStock": {
+    "rows": 1,
+    "rowText": [
+      "1 sent outUsed used of 1 1to "
+    ],
+    "error": ""
+  },
+  "badJson": {
+    "status": "Expected property name or '}' in JSON at position 1 (line 1 column 2) Choose a Stock Return Trail JSON backup.",
+    "warning": "notice warning"
+  }
+}

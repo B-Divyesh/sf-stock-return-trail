@@ -1,0 +1,24 @@
+{
+  "first429": {
+    "n": 3,
+    "status": 429,
+    "retryAfter": "2"
+  },
+  "responses": [
+    {
+      "n": 1,
+      "status": 200,
+      "retryAfter": null
+    },
+    {
+      "n": 2,
+      "status": 200,
+      "retryAfter": null
+    },
+    {
+      "n": 3,
+      "status": 429,
+      "retryAfter": "2"
+    }
+  ]
+}
