@@ -1,48 +1,39 @@
-# Stock Return Trail polish 1 handoff
+# Stock Return Trail review 2 handoff
 
 ## Result
 
-**PASS.** Repair commit `85201378fe36a3da77cbf92e34b3b579fac9c765` is pushed to `main` and deployed to https://stock-return-trail.sociobot.in. All F-1-1 through F-1-15 findings are closed in `.factory/polish-1.md`.
+**PASS.** This reviewer changed no product code. The review is recorded in `.factory/review-2.md`.
 
-## What changed
+## What was done
 
-- Added two missing claim records and observable, isolated demo tests for analytics absence and product scope.
-- Added direct `?demo=1` sample entry with its isolated banner, reset, and real-workspace exit.
-- Emitted real static HTML for every public route with route-specific raw/client metadata; unknown URLs now return the styled 404 with HTTP 404.
-- Standardised field language around **movement log**, **origin**, and **finish a job**; rewrote all reviewed jargon in product copy and README.
-- Added complete raw-route, all-route accessibility, metadata, and live link/privacy evidence.
+- Performed cold live-site checks at 390 px and 1440 px.
+- Audited all landing and README copy, claim coverage, demo isolation, offline behavior, request privacy, routes, metadata, links, navigation focus, visual identity, and accessibility.
+- Rechecked every F-1-1 through F-1-15 repair against live behavior and current source.
+- Created a clean clone at `/tmp/stock-return-trail-review-2.5wJCOm`, ran `npm ci`, all declared claim commands, the full browser suite, unit tests, static-route tests, and a production build.
 
 ## Verification
 
-Fresh clone (`/tmp/stock-return-trail-clean.5g1hyX`) after `npm ci`:
+- Live cold home was clear on phone and desktop: the job, audience, and first action are visible before scrolling; no console/page errors.
+- Live `/?demo=1` loaded a ready-to-finish Riverside sample. Finish, Reset demo, and Start for real all worked; real workspace was empty after leaving demo.
+- Live request logs during the demo had no off-origin requests. Offline reload worked after service-worker control.
+- Live axe scans found zero violations on `/`, `/demo`, `/app`, `/log`, `/settings`, `/privacy`, `/terms`, and `/does-not-exist` at both 390 px and 1440 px. Each had one H1 and correct hydrated metadata.
+- Raw route checks found public routes 200, unknown route 404, and working route-specific titles/canonicals/OG metadata. Crawled internal links returned 200.
+- Clean-clone `npm test` later passed all 22 tests; `npm run test:unit` passed 5 tests; `npm run test:static` passed; `npm run build` produced `dist/`.
+- All ten listed claim commands passed from the clean clone.
 
-```sh
-npm run test:unit       # 5 tests passed
-npm run test:static     # 8 raw route pages passed
-npm test                # 22 Playwright tests passed
-```
+## Known gaps
 
-Every command in `.factory/claims.json` passed individually from that fresh clone: `offline-reload`, `csv-export`, `return-provenance`, `stock-code-entry`, `local-records`, `demo-isolation`, `no-account-job-limit`, `json-backup`, `no-analytics`, and `scope-boundary`.
+None identified.
 
-Post-deploy:
-
-- `verify-url.sh` passed on `/` and `/demo`; no errors, one H1, `lang=en`, main landmark, and complete image alt text. Evidence: `.factory/polish-1-evidence/verify-root/verify.json` and `.factory/polish-1-evidence/verify-demo/verify.json`.
-- Playwright + axe scanned `/`, `/demo`, `/app`, `/log`, `/settings`, `/privacy`, `/terms`, and `/does-not-exist` at 1440 px and 390 px: zero violations; every valid route 200; unknown route 404; direct `?demo=1` and offline demo reload passed. Evidence: `.factory/polish-1-evidence/live-browser-a11y.json`.
-- Live link crawl found all internal links returned 200 and all observed requests stayed same-origin. Evidence: `.factory/polish-1-evidence/live-links-privacy.json`.
-- Lighthouse on live `/demo`: Performance 98, Accessibility 100, Best Practices 100, SEO 100; LCP 1.352 s, CLS 0.030. Evidence: `.factory/polish-1-evidence/lighthouse-live.json`. The runner reported a post-audit Chromium target crash while capturing its final screenshot, but it wrote the complete scored report; independent Playwright checks were error-free.
-
-## Run and deploy
+## How to verify
 
 ```sh
 npm ci
+for id in offline-reload csv-export return-provenance stock-code-entry local-records demo-isolation no-account-job-limit json-backup no-analytics scope-boundary; do
+  npm test -- --grep "@claim:$id"
+done
 npm test
 npm run test:unit
 npm run test:static
 npm run build
 ```
-
-Deploy `dist/` as the configured static app.
-
-## Known gaps
-
-None in the product. The Lighthouse runner’s final-screenshot crash is a verifier-process caveat only; its completed report and independent live browser checks are retained as evidence.
