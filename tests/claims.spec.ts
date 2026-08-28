@@ -48,46 +48,21 @@ test('@claim:demo-isolation keeps real records empty', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'No jobs are on the trail' })).toBeVisible();
 });
 
-test('@claim:free-job-limit allows two free jobs and removes the limit with a valid license', async ({ page, browser }) => {
+test('@claim:no-account-job-limit allows a field team to create more than two open jobs without a purchase gate', async ({ page }) => {
   await page.goto('/app');
-  for (const number of [1, 2]) {
+  for (const number of [1, 2, 3]) {
     if (number === 1) await page.getByRole('button', { name: 'Create your first job' }).click();
     else await page.locator('.app-head').getByRole('button', { name: 'Create job' }).click();
     await page.getByLabel('Job name').fill(`Job ${number}`);
     await page.getByLabel('Temporary location').fill(`Site ${number}`);
     await page.getByRole('button', { name: 'Create job', exact: true }).last().click();
   }
-  await page.locator('.app-head').getByRole('button', { name: 'Create job' }).click();
-  await page.getByLabel('Job name').fill('Job 3');
-  await page.getByLabel('Temporary location').fill('Site 3');
-  await page.getByRole('button', { name: 'Create job', exact: true }).last().click();
-  await expect(page.getByText('The free plan allows two open jobs.')).toBeVisible();
-  await expect(page.getByText('2 open')).toBeVisible();
-
-  const paidContext = await browser.newContext();
-  const paidPage = await paidContext.newPage();
-  await paidPage.addInitScript(() => {
-    localStorage.setItem('sb_license:stock-return-trail', 'test-license');
-    localStorage.setItem('sb_license_verdict:stock-return-trail', JSON.stringify({ valid: true, checkedAt: Date.now() }));
-  });
-  await paidPage.goto('/settings');
-  await expect(paidPage.getByText('Site kit is active on this device.')).toBeVisible();
-  for (const number of [1, 2, 3]) {
-    await paidPage.goto('/app');
-    const first = paidPage.getByRole('button', { name: 'Create your first job' });
-    if (await first.isVisible().catch(() => false)) await first.click();
-    else await paidPage.locator('.app-head').getByRole('button', { name: 'Create job' }).click();
-    await paidPage.getByLabel('Job name').fill(`Paid job ${number}`);
-    await paidPage.getByLabel('Temporary location').fill(`Paid site ${number}`);
-    await paidPage.getByRole('button', { name: 'Create job', exact: true }).last().click();
-    await expect(paidPage.getByText(`${number} open`)).toBeVisible();
-  }
-  await paidContext.close();
+  await expect(page.getByText('3 open')).toBeVisible();
 });
 
 test('@claim:json-backup contains jobs and movements', async ({ page }) => {
   await page.goto('/demo');
-  await page.getByRole('link', { name: 'Backup & license' }).click();
+  await page.getByRole('link', { name: 'Backup' }).click();
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download JSON backup' }).click();
   const download = await downloadPromise;

@@ -14,14 +14,9 @@ Stock Return Trail is an offline-first field tool for small service teams and ma
 - JSON backup and import
 - Offline reload after the first visit
 - Separate demo and real IndexedDB databases
+- Use it without an account or a job limit
 
 Movement logs support field closeout. They are not audit-grade inventory valuation.
-
-## Price
-
-The free version supports two open jobs. Core closeout, CSV export, JSON backup, and offline use remain free. A £19 one-time site kit license removes the open-job limit.
-
-Checkout and license verification use the Sociobot billing API. No product ID or payment-provider secret is stored here.
 
 ## Develop
 

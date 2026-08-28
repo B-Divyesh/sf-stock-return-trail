@@ -1,4 +1,4 @@
-import type { AppState } from './types';
+import type { AppState, Job, Movement, MovementKind, StockLine } from './types';
 
 const STORE = 'state';
 const KEY = 'workspace';
@@ -79,8 +79,97 @@ export async function resetDemo(): Promise<void> {
 }
 
 export async function importState(value: unknown): Promise<AppState> {
-  if (!value || typeof value !== 'object') throw new Error('The file does not contain a Stock Return Trail backup.');
-  const state = value as AppState;
-  if (!Array.isArray(state.jobs) || !Array.isArray(state.movements)) throw new Error('The backup is missing jobs or movements.');
-  return state;
+  if (!isRecord(value)) throw new Error('The file does not contain a Stock Return Trail backup.');
+  if (!Array.isArray(value.jobs) || !Array.isArray(value.movements) || !isTimestamp(value.updatedAt)) {
+    throw new Error('The backup is missing valid jobs, movements, or an export date.');
+  }
+
+  const jobs = value.jobs.map((job, index) => parseJob(job, index));
+  const jobIds = new Set(jobs.map((job) => job.id));
+  if (jobIds.size !== jobs.length) throw new Error('The backup contains duplicate job identifiers.');
+  const lineIds = jobs.flatMap((job) => job.lines.map((line) => line.id));
+  if (new Set(lineIds).size !== lineIds.length) throw new Error('The backup contains duplicate stock-line identifiers.');
+
+  const movements = value.movements.map((movement, index) => parseMovement(movement, index, jobIds));
+  if (new Set(movements.map((movement) => movement.id)).size !== movements.length) {
+    throw new Error('The backup contains duplicate movement identifiers.');
+  }
+  return { jobs, movements, updatedAt: value.updatedAt };
+}
+
+type UnknownRecord = Record<string, unknown>;
+
+function isRecord(value: unknown): value is UnknownRecord {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function requiredText(value: unknown, label: string): string {
+  if (typeof value !== 'string' || !value.trim()) throw new Error(`The backup has a blank or missing ${label}.`);
+  return value.trim();
+}
+
+function isTimestamp(value: unknown): value is string {
+  return typeof value === 'string' && value.trim() !== '' && Number.isFinite(Date.parse(value));
+}
+
+function requiredTimestamp(value: unknown, label: string): string {
+  if (!isTimestamp(value)) throw new Error(`The backup has an invalid ${label}.`);
+  return value;
+}
+
+function wholeNumber(value: unknown, label: string, minimum: number, maximum = 99999): number {
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < minimum || value > maximum) {
+    throw new Error(`The backup has an invalid ${label}.`);
+  }
+  return value;
+}
+
+function parseLine(value: unknown, jobIndex: number, lineIndex: number): StockLine {
+  if (!isRecord(value)) throw new Error(`Job ${jobIndex + 1} has an invalid stock line ${lineIndex + 1}.`);
+  const quantity = wholeNumber(value.quantity, `count on stock line ${lineIndex + 1}`, 1);
+  const used = wholeNumber(value.used, `used count on stock line ${lineIndex + 1}`, 0, quantity);
+  return {
+    id: requiredText(value.id, `stock-line identifier ${lineIndex + 1}`),
+    code: requiredText(value.code, `stock code on line ${lineIndex + 1}`),
+    name: requiredText(value.name, `stock name on line ${lineIndex + 1}`),
+    quantity,
+    used,
+    origin: requiredText(value.origin, `origin on stock line ${lineIndex + 1}`),
+  };
+}
+
+function parseJob(value: unknown, index: number): Job {
+  if (!isRecord(value) || !Array.isArray(value.lines)) throw new Error(`The backup has an invalid job ${index + 1}.`);
+  if (value.status !== 'open' && value.status !== 'closed') throw new Error(`The backup has an invalid status on job ${index + 1}.`);
+  const closedAt = value.closedAt === undefined ? undefined : requiredTimestamp(value.closedAt, `close date on job ${index + 1}`);
+  if (value.status === 'closed' && !closedAt) throw new Error(`The backup is missing the close date on job ${index + 1}.`);
+  return {
+    id: requiredText(value.id, `job identifier ${index + 1}`),
+    name: requiredText(value.name, `job name ${index + 1}`),
+    site: requiredText(value.site, `job location ${index + 1}`),
+    status: value.status,
+    createdAt: requiredTimestamp(value.createdAt, `start date on job ${index + 1}`),
+    ...(closedAt ? { closedAt } : {}),
+    lines: value.lines.map((line, lineIndex) => parseLine(line, index, lineIndex)),
+  };
+}
+
+function parseMovement(value: unknown, index: number, jobIds: Set<string>): Movement {
+  if (!isRecord(value)) throw new Error(`The backup has an invalid movement ${index + 1}.`);
+  const kind = value.kind;
+  if (kind !== 'out' && kind !== 'used' && kind !== 'return') throw new Error(`The backup has an invalid movement type on movement ${index + 1}.`);
+  const jobId = requiredText(value.jobId, `job identifier on movement ${index + 1}`);
+  if (!jobIds.has(jobId)) throw new Error(`Movement ${index + 1} does not belong to a job in this backup.`);
+  return {
+    id: requiredText(value.id, `movement identifier ${index + 1}`),
+    at: requiredTimestamp(value.at, `date on movement ${index + 1}`),
+    jobId,
+    jobName: requiredText(value.jobName, `job name on movement ${index + 1}`),
+    itemCode: requiredText(value.itemCode, `stock code on movement ${index + 1}`),
+    itemName: requiredText(value.itemName, `stock name on movement ${index + 1}`),
+    quantity: wholeNumber(value.quantity, `count on movement ${index + 1}`, 1),
+    kind: kind as MovementKind,
+    from: requiredText(value.from, `origin on movement ${index + 1}`),
+    to: requiredText(value.to, `destination on movement ${index + 1}`),
+  };
 }

@@ -42,11 +42,11 @@
     "sandbox": "fresh browser context; close the demo job, switch to /app, and assert the real workspace is empty"
   },
   {
-    "id": "free-job-limit",
-    "claim": "The free version supports two open jobs; the £19 site kit removes the limit.",
-    "where": "landing facts, paid section, settings, and README",
-    "test": "npm test -- --grep @claim:free-job-limit",
-    "sandbox": "fresh real workspace; create two open jobs and assert a third shows the plan limit"
+    "id": "no-account-job-limit",
+    "claim": "Use it without an account or a job limit.",
+    "where": "landing facts and README",
+    "test": "npm test -- --grep @claim:no-account-job-limit",
+    "sandbox": "fresh real workspace; create three open jobs without signing in or seeing a purchase gate"
   },
   {
     "id": "json-backup",

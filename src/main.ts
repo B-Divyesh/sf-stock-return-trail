@@ -1,13 +1,10 @@
 import './style.css';
 import { importState, loadState, resetDemo, saveState } from './db';
-import { cachedLicense, captureLicense, storeLicense, verifyLicense, type LicenseState } from './license';
 import type { AppState, Job, Movement, StockLine } from './types';
 
 const root = document.querySelector<HTMLDivElement>('#app')!;
 let state: AppState = { jobs: [], movements: [], updatedAt: '' };
 let isDemo = location.pathname === '/demo' || new URLSearchParams(location.search).get('demo') === '1';
-captureLicense();
-let license: LicenseState = cachedLicense();
 let activeJobId = '';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const scrollPositions = new Map<string, number>();
@@ -18,7 +15,7 @@ const routeMeta: Record<string, { title: string; description: string }> = {
   '/demo': { title: 'Demo — Stock Return Trail', description: 'Try a ready-to-close stock return with sample data.' },
   '/app': { title: 'Jobs — Stock Return Trail', description: 'Record stock leaving a store and close each job with returns.' },
   '/log': { title: 'Movement log — Stock Return Trail', description: 'Review and export your local stock movement log.' },
-  '/settings': { title: 'Backup and license — Stock Return Trail', description: 'Back up local records and manage your Stock Return Trail license.' },
+  '/settings': { title: 'Backup — Stock Return Trail', description: 'Back up and restore your local Stock Return Trail records.' },
   '/privacy': { title: 'Privacy — Stock Return Trail', description: 'How Stock Return Trail stores and handles your data.' },
   '/terms': { title: 'Terms — Stock Return Trail', description: 'Terms for using Stock Return Trail.' },
   '/404': { title: 'Page not found — Stock Return Trail', description: 'Return to Stock Return Trail.' },
@@ -59,7 +56,7 @@ function shell(content: string) {
     <main id="main" tabindex="-1">${content}</main>
     <footer class="site-footer">
       <p><strong>Stock Return Trail</strong><br><span>Return unused job stock to its saved origin.</span></p>
-      <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/settings">Backup &amp; license</a></nav>
+      <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/settings">Backup</a></nav>
       <p>Built by Param Factory · v1.0.0<br><small>Hero artwork generated for this product.</small></p>
     </footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -74,7 +71,7 @@ function homePage() {
         <h1 tabindex="-1">Return job stock to the right place</h1>
         <p class="lede">For field teams who need each unused item sent back without searching old movement records.</p>
         <div class="hero-action"><a class="button primary" href="/demo">Try it with sample data</a><span>Open a ready-to-close job. Nothing is saved.</span></div>
-        <ul class="plain-facts" aria-label="Product facts"><li>Works offline after your first visit.</li><li>Your stock records stay in this browser.</li><li>Free for two open jobs. £19 once for unlimited jobs.</li></ul>
+        <ul class="plain-facts" aria-label="Product facts"><li>Works offline after your first visit.</li><li>Your stock records stay in this browser.</li><li>Use it without an account or a job limit.</li></ul>
       </div>
       <figure class="hero-art"><picture><source srcset="/assets/hero-topographic.avif" type="image/avif"><img src="/assets/hero-topographic.webp" width="900" height="600" fetchpriority="high" alt="A field parts case connected to its stockroom by a red route line."></picture><figcaption>Each item keeps its origin while it is out on a job.</figcaption></figure>
     </section>
@@ -89,7 +86,6 @@ function homePage() {
     </section>
     <section class="how section-rule" aria-labelledby="how-title"><div class="section-heading"><p class="eyebrow">Three field marks</p><h2 id="how-title">How the trail works</h2></div><ol class="steps"><li><span>01</span><h3>Record stock out</h3><p>Scan or enter a code. Add its count and store location.</p></li><li><span>02</span><h3>Count what was used</h3><p>At closeout, enter the used count for each stock line.</p></li><li><span>03</span><h3>Return the remainder</h3><p>The sheet names each origin and adds the moves to your CSV log.</p></li></ol></section>
     <section class="limits section-rule" aria-labelledby="limits-title"><div><p class="eyebrow">A narrow tool on purpose</p><h2 id="limits-title">A return trail, not an accounts system</h2></div><div><p>Stock Return Trail does not price stock, place orders, or sync teams.</p><p>Movement logs help with field closeout. They are not audit-grade inventory valuation.</p><p>You can export CSV and JSON backups at any time.</p></div></section>
-    <section class="price-section section-rule" aria-labelledby="price-title"><div><p class="eyebrow">Site kit</p><h2 id="price-title">Use two jobs free, or remove the limit</h2><p>Core closeout, CSV export, JSON backup, and offline use stay free.</p></div><div class="price-stamp"><span>One-time purchase</span><strong>£19</strong><p>Unlimited open jobs on licensed devices.</p><a class="button primary" href="https://api.sociobot.in/api/v1/products/stock-return-trail/checkout">Buy the site kit</a><a href="/settings">Have a license? Restore it</a></div></section>
   `);
 }
 
@@ -100,7 +96,6 @@ function appPage() {
   const jobContent = active ? jobPanel(active) : `<section class="empty-state"><div class="contour-pin" aria-hidden="true">＋</div><h2>No jobs are on the trail</h2><p>Create a job, then add stock as it leaves its origin.</p><button class="button primary" data-action="show-job-form">Create your first job</button></section>`;
   return shell(`
     <section class="app-head"><div><p class="eyebrow">Field board</p><h1 tabindex="-1">Track stock out and back</h1><p>${isDemo ? 'This sample job is ready for closeout.' : 'Each stock line keeps the origin you record.'}</p></div><button class="button secondary" data-action="show-job-form">Create job</button></section>
-    ${license.notice ? `<p class="notice warning">${esc(license.notice)} <a href="/settings">Check your license</a>.</p>` : ''}
     <div class="job-layout">
       <aside class="job-rail" aria-label="Jobs"><div class="rail-title"><h2>Jobs</h2><span>${openJobs.length} open</span></div>${state.jobs.length ? `<div class="job-list">${state.jobs.map((job) => `<button class="job-tab ${job.id === active?.id ? 'active' : ''}" data-job="${job.id}" aria-pressed="${job.id === active?.id}"><span>${esc(job.name)}</span><small>${job.status === 'open' ? `${job.lines.length} stock lines` : 'Closed'}</small></button>`).join('')}</div>` : '<p class="rail-empty">Created jobs appear here.</p>'}</aside>
       <div class="job-work">${jobContent}</div>
@@ -131,15 +126,15 @@ function logPage() {
 }
 
 function settingsPage() {
-  return shell(`<section class="page-head"><div><p class="eyebrow">Your records</p><h1 tabindex="-1">Back up data and restore access</h1><p>Exports let you move or copy the records kept in this browser.</p></div></section><div class="settings-grid"><section><h2>Back up your records</h2><p>Download all jobs and movements as one JSON file.</p><div class="button-row"><button class="button primary" data-action="export-json">Download JSON backup</button><label class="button secondary file-button">Import JSON<input id="import-file" type="file" accept="application/json,.json"></label></div><p class="notice" id="import-status" role="status"></p></section><section><h2>Site kit license</h2><p>£19 once removes the two-open-job limit on licensed devices.</p>${license.unlocked ? '<p class="license-good">✓ Site kit is active on this device.</p>' : `<a class="button primary" href="https://api.sociobot.in/api/v1/products/stock-return-trail/checkout">Buy the site kit</a><form id="license-form"><label>License token<input name="token" required autocomplete="off" spellcheck="false"></label><p class="field-help">Paste the token from your purchase email.</p><p class="form-error" id="license-error" role="alert">${esc(license.notice || '')}</p><button class="button secondary" type="submit">Verify license</button></form>`}</section></div>`);
+  return shell(`<section class="page-head"><div><p class="eyebrow">Your records</p><h1 tabindex="-1">Back up your records</h1><p>Exports let you move or copy the records kept in this browser.</p></div></section><div class="settings-grid settings-grid-single"><section><h2>Back up your records</h2><p>Download all jobs and movements as one JSON file.</p><div class="button-row"><button class="button primary" data-action="export-json">Download JSON backup</button><label class="button secondary file-button">Import JSON<input id="import-file" type="file" accept="application/json,.json"></label></div><p class="notice" id="import-status" role="status"></p></section></div>`);
 }
 
 function privacyPage() {
-  return shell(`<article class="prose"><p class="eyebrow">Plain privacy</p><h1 tabindex="-1">Your stock records stay on your device</h1><p class="lede">Stock Return Trail keeps jobs and movements in your browser’s IndexedDB storage.</p><h2>What stays local</h2><p>Job names, locations, stock codes, counts, and movement logs stay in your browser. Demo records use a separate database and are discarded when you reset the demo.</p><h2>When the network is used</h2><p>The app downloads its files on your first visit. A license check sends only your license token to Sociobot. Checkout opens the Sociobot payment page, where Sociobot and Dodo act as merchant of record.</p><h2>Your choices</h2><p>You can export a JSON backup or CSV log. Clearing site data removes local records. We cannot recover records you have not backed up.</p><h2>Contact</h2><p>For privacy questions, email <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
+  return shell(`<article class="prose"><p class="eyebrow">Plain privacy</p><h1 tabindex="-1">Your stock records stay on your device</h1><p class="lede">Stock Return Trail keeps jobs and movements in your browser’s IndexedDB storage.</p><h2>What stays local</h2><p>Job names, locations, stock codes, counts, and movement logs stay in your browser. Demo records use a separate database and are discarded when you reset the demo.</p><h2>When the network is used</h2><p>The app downloads its files on your first visit. It does not send stock records to a server.</p><h2>Your choices</h2><p>You can export a JSON backup or CSV log. Clearing site data removes local records. We cannot recover records you have not backed up.</p><h2>Contact</h2><p>For privacy questions, email <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
 }
 
 function termsPage() {
-  return shell(`<article class="prose"><p class="eyebrow">Use terms</p><h1 tabindex="-1">Use the trail as a field record</h1><p class="lede">These terms cover Stock Return Trail and its one-time site kit license.</p><h2>The tool</h2><p>Stock Return Trail records movements you enter. It does not verify physical stock or provide audit-grade inventory valuation.</p><h2>Your responsibility</h2><p>Check counts and origins before moving stock. Keep backups you need. Do not rely on the app as your only legal or accounting record.</p><h2>Purchase and refunds</h2><p>Sociobot and Dodo are the merchant of record. The £19 site kit is a one-time purchase for unlimited open jobs. Refunds are handled by the merchant of record. A refund revokes its license.</p><h2>Availability</h2><p>The software is provided as-is under the MIT license. We may fix or change it without promising continuous service.</p><h2>Contact</h2><p>For terms questions, email <a href="mailto:support@sociobot.in">support@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
+  return shell(`<article class="prose"><p class="eyebrow">Use terms</p><h1 tabindex="-1">Use the trail as a field record</h1><p class="lede">These terms cover Stock Return Trail.</p><h2>The tool</h2><p>Stock Return Trail records movements you enter. It does not verify physical stock or provide audit-grade inventory valuation.</p><h2>Your responsibility</h2><p>Check counts and origins before moving stock. Keep backups you need. Do not rely on the app as your only legal or accounting record.</p><h2>Availability</h2><p>The software is provided as-is under the MIT license. We may fix or change it without promising continuous service.</p><h2>Contact</h2><p>For terms questions, email <a href="mailto:support@sociobot.in">support@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
 }
 
 function notFoundPage() {
@@ -195,8 +190,8 @@ function bindEvents() {
   document.querySelectorAll<HTMLButtonElement>('[data-job]').forEach((button) => button.addEventListener('click', () => { activeJobId = button.dataset.job!; void render(); }));
   document.querySelector<HTMLFormElement>('#job-form')?.addEventListener('submit', createJob);
   document.querySelector<HTMLFormElement>('#stock-form')?.addEventListener('submit', addStock);
-  document.querySelector<HTMLFormElement>('#license-form')?.addEventListener('submit', submitLicense);
   document.querySelectorAll<HTMLInputElement>('.used-input').forEach((input) => input.addEventListener('input', updateReturnCount));
+  document.querySelectorAll<HTMLInputElement>('#job-form input, #stock-form input').forEach((input) => input.addEventListener('input', () => input.setCustomValidity('')));
   document.querySelector<HTMLInputElement>('#import-file')?.addEventListener('change', handleImport);
 }
 
@@ -217,12 +212,11 @@ async function createJob(event: SubmitEvent) {
   event.preventDefault();
   const form = event.currentTarget as HTMLFormElement;
   const data = new FormData(form);
-  const openCount = state.jobs.filter((job) => job.status === 'open').length;
-  if (openCount >= 2 && !license.unlocked && !isDemo) {
-    document.querySelector('#job-error')!.textContent = 'The free plan allows two open jobs. Close one job or activate the site kit.';
-    return;
-  }
-  const job: Job = { id: id(), name: String(data.get('name')).trim(), site: String(data.get('site')).trim(), status: 'open', createdAt: new Date().toISOString(), lines: [] };
+  const name = requiredFormText(form, 'name', 'job name', '#job-error');
+  if (!name) return;
+  const site = requiredFormText(form, 'site', 'temporary location', '#job-error');
+  if (!site) return;
+  const job: Job = { id: id(), name, site, status: 'open', createdAt: new Date().toISOString(), lines: [] };
   state.jobs.unshift(job);
   activeJobId = job.id;
   await saveState(isDemo, state);
@@ -237,14 +231,38 @@ async function addStock(event: SubmitEvent) {
   const data = new FormData(form);
   const job = state.jobs.find((item) => item.id === activeJobId);
   if (!job) return;
+  const code = requiredFormText(form, 'code', 'stock code', '#stock-error');
+  if (!code) return;
+  const name = requiredFormText(form, 'name', 'item name', '#stock-error');
+  if (!name) return;
+  const origin = requiredFormText(form, 'origin', 'origin', '#stock-error');
+  if (!origin) return;
   const quantity = Number(data.get('quantity'));
   if (!Number.isInteger(quantity) || quantity < 1) { document.querySelector('#stock-error')!.textContent = 'The count must be a whole number of at least one.'; return; }
-  const line: StockLine = { id: id(), code: String(data.get('code')).trim(), name: String(data.get('name')).trim(), quantity, used: 0, origin: String(data.get('origin')).trim() };
+  const line: StockLine = { id: id(), code, name, quantity, used: 0, origin };
   job.lines.push(line);
   state.movements.push(movement(job, line, 'out', quantity, line.origin, job.site));
   await saveState(isDemo, state);
   await render();
   showToast(`${line.name} added to ${job.name}.`);
+}
+
+function requiredFormText(form: HTMLFormElement, fieldName: string, label: string, errorSelector: string): string | undefined {
+  const input = form.elements.namedItem(fieldName) as HTMLInputElement | null;
+  const value = input?.value.trim() || '';
+  if (value) {
+    input?.setCustomValidity('');
+    return value;
+  }
+  const message = `Enter a ${label}, not only spaces.`;
+  if (input) {
+    input.setCustomValidity(message);
+    input.reportValidity();
+    input.focus();
+  }
+  const error = document.querySelector<HTMLElement>(errorSelector);
+  if (error) error.textContent = message;
+  return undefined;
 }
 
 function movement(job: Job, line: StockLine, kind: Movement['kind'], quantity: number, from: string, to: string): Movement {
@@ -322,15 +340,6 @@ async function handleImport(event: Event) {
   }
 }
 
-async function submitLicense(event: SubmitEvent) {
-  event.preventDefault();
-  const form = event.currentTarget as HTMLFormElement;
-  const button = form.querySelector<HTMLButtonElement>('button')!;
-  button.disabled = true; button.textContent = 'Checking license…';
-  license = await storeLicense(String(new FormData(form).get('token')));
-  await render();
-}
-
 let scannerStream: MediaStream | undefined;
 async function startScanner() {
   const dialog = document.querySelector<HTMLDialogElement>('#scanner-dialog')!;
@@ -376,13 +385,6 @@ async function initialise() {
     root.innerHTML = shell(`<section class="empty-state"><div class="contour-pin" aria-hidden="true">!</div><h1 tabindex="-1">Local records could not open</h1><p>Check that browser storage is allowed, then reload this page.</p><button class="button primary" id="reload-app">Reload the app</button></section>`);
     document.querySelector('#reload-app')?.addEventListener('click', () => location.reload());
     return;
-  }
-  if (localStorage.getItem('sb_license:stock-return-trail')) {
-    const verified = await verifyLicense();
-    if (verified.unlocked !== license.unlocked || verified.notice !== license.notice) {
-      license = verified;
-      await render();
-    }
   }
 }
 void initialise();
