@@ -64,6 +64,22 @@ npm test
   Practices 100, SEO 100; LCP 1.4 s, CLS 0.03, TBT 0 ms. See
   `.factory/lighthouse-repair.json`.
 
+## Deployment evidence
+
+- Deployed static artifact from repair commit
+  `1607fe913d0359af66714118c8bcb5267fae5388` to
+  `https://stock-return-trail.sociobot.in` on 2026-08-28 (Azure Static Web Apps
+  deployment `63740e01-9bd4-48b9-9c87-92ba9c307bae`).
+- The live root was byte-identical to `dist/index.html`. Live browser smoke
+  passed at desktop and 390 px: no console errors, no off-origin requests, no
+  checkout link, 44 px demo targets, service-worker control, and offline demo
+  reload.
+- Live response policy check passed: HTML revalidates; `/assets/*` is
+  `max-age=31536000, immutable`; the manifest revalidates after 300 seconds;
+  `sw.js` is `no-cache, no-store`; HTTPS/HSTS, CSP, `nosniff`, referrer, and
+  permissions headers are present. The CSP allows only same-origin network and
+  form connections.
+
 ## Product boundaries and next steps
 
 - This remains a single-device, local-first PWA. Records are in IndexedDB;
