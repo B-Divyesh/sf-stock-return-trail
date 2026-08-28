@@ -14,8 +14,8 @@ test('@claim:offline-reload works after the first visit', async ({ page, context
 
 test('@claim:csv-export exports all demo movements', async ({ page }) => {
   await page.goto('/demo');
-  await page.getByRole('button', { name: 'Record returns & close job' }).click();
-  await page.getByRole('link', { name: 'Open trail log' }).click();
+  await page.getByRole('button', { name: 'Record returns & finish job' }).click();
+  await page.getByRole('link', { name: 'Open movement log' }).click();
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export CSV' }).click();
   const download = await downloadPromise;
@@ -36,14 +36,14 @@ test('@claim:local-records sends no demo records off-site', async ({ page }) => 
     if (url.origin !== 'http://127.0.0.1:4173') external.push(request.url());
   });
   await page.goto('/demo');
-  await page.getByRole('button', { name: 'Record returns & close job' }).click();
+  await page.getByRole('button', { name: 'Record returns & finish job' }).click();
   await expect(page.getByText('Return trail saved')).toBeVisible();
   expect(external).toEqual([]);
 });
 
 test('@claim:demo-isolation keeps real records empty', async ({ page }) => {
   await page.goto('/demo');
-  await page.getByRole('button', { name: 'Record returns & close job' }).click();
+  await page.getByRole('button', { name: 'Record returns & finish job' }).click();
   await page.getByRole('link', { name: 'Start for real' }).click();
   await expect(page.getByRole('heading', { name: 'No jobs are on the trail' })).toBeVisible();
 });
@@ -75,4 +75,46 @@ test('@claim:json-backup contains jobs and movements', async ({ page }) => {
   page.once('dialog', (dialog) => dialog.accept());
   await page.locator('#import-file').setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(backup)) });
   await expect(page.getByText('Backup imported. Your local records were replaced.')).toBeVisible();
+});
+
+test('@claim:no-analytics makes no analytics, beacon, or off-site request', async ({ page }) => {
+  const external: string[] = [];
+  const beacons: string[] = [];
+  await page.addInitScript(() => {
+    const original = navigator.sendBeacon.bind(navigator);
+    Object.defineProperty(navigator, 'sendBeacon', { configurable: true, value: (url: string | URL, data?: BodyInit | null) => {
+      (window as Window & { __beacons?: string[] }).__beacons ||= [];
+      window.__beacons.push(String(url));
+      return original(url, data);
+    } });
+  });
+  page.on('request', (request) => {
+    const url = new URL(request.url());
+    if (url.origin !== 'http://127.0.0.1:4173') external.push(request.url());
+  });
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Try it with sample data' }).click();
+  await page.getByRole('button', { name: 'Record returns & finish job' }).click();
+  await expect(page.getByText('Return trail saved')).toBeVisible();
+  beacons.push(...await page.evaluate(() => (window as Window & { __beacons?: string[] }).__beacons || []));
+  expect(external).toEqual([]);
+  expect(beacons).toEqual([]);
+});
+
+test('@claim:scope-boundary has no pricing, ordering, or team-sync feature', async ({ page }) => {
+  const external: string[] = [];
+  page.on('request', (request) => {
+    const url = new URL(request.url());
+    if (url.origin !== 'http://127.0.0.1:4173') external.push(request.url());
+  });
+  await page.goto('/demo');
+  await page.getByRole('button', { name: 'Record returns & finish job' }).click();
+  await expect(page.getByText('Return trail saved')).toBeVisible();
+  for (const route of ['/', '/demo', '/app', '/log', '/settings', '/privacy', '/terms']) {
+    await page.goto(route);
+    const featureControls = await page.locator('a, button, input, select, textarea').allTextContents();
+    expect(featureControls.join(' ')).not.toMatch(/price|order|checkout|purchase|team sync|sync team/i);
+    await expect(page.locator('a[href*="checkout"], button[data-action*="order"], button[data-action*="sync"]')).toHaveCount(0);
+  }
+  expect(external).toEqual([]);
 });

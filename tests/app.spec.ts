@@ -28,6 +28,18 @@ test('app and privacy routes have no serious accessibility findings', async ({ p
   }
 });
 
+test('all public routes have no accessibility violations at desktop and phone widths', async ({ page }) => {
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    for (const path of ['/', '/demo', '/app', '/log', '/settings', '/privacy', '/terms', '/does-not-exist']) {
+      await page.goto(path);
+      const results = await new AxeBuilder({ page }).analyze();
+      expect(results.violations, `${path} at ${viewport.width}px`).toEqual([]);
+      await expect(page.locator('h1')).toHaveCount(1);
+    }
+  }
+});
+
 test('@claim:return-provenance calculates returns and records their origins', async ({ page }) => {
   await page.goto('/demo');
   await expect(page.locator('[data-return="line-valve"]')).toHaveText('4');
@@ -35,9 +47,9 @@ test('@claim:return-provenance calculates returns and records their origins', as
   await expect(page.locator('[data-return="line-clips"]')).toHaveText('6');
   await expect(page.getByText('Main stores · Bin B4').first()).toBeVisible();
   await expect(page.getByText('Workshop · Cable rack').first()).toBeVisible();
-  await page.getByRole('button', { name: 'Record returns & close job' }).click();
+  await page.getByRole('button', { name: 'Record returns & finish job' }).click();
   await expect(page.getByText('Return trail saved')).toBeVisible();
-  await page.getByRole('link', { name: 'Open trail log' }).click();
+  await page.getByRole('link', { name: 'Open movement log' }).click();
   await expect(page.getByText('9 recorded movements')).toBeVisible();
 });
 
@@ -69,7 +81,7 @@ test('mobile layout keeps primary controls visible', async ({ page }) => {
     ['job sheet', page.locator('.job-sheet')],
     ['route strip', page.locator('.route-strip')],
     ['closeout bar', page.locator('.closeout-bar')],
-    ['close job button', page.getByRole('button', { name: 'Record returns & close job' })],
+    ['finish job button', page.getByRole('button', { name: 'Record returns & finish job' })],
   ] as const;
   for (const [name, control] of essentialControls) {
     await expect(control).toBeVisible();
@@ -145,6 +157,23 @@ test('legal pages and unknown route have unique pages', async ({ page }) => {
   await expect(page).toHaveTitle('Terms — Stock Return Trail');
   await page.goto('/does-not-exist');
   await expect(page.getByRole('heading', { name: 'This page is not on the trail' })).toBeVisible();
+});
+
+test('direct ?demo=1 opens the isolated sample with its banner and reset action', async ({ page }) => {
+  await page.goto('/?demo=1');
+  await expect(page).toHaveTitle('Demo — Stock Return Trail');
+  await expect(page.getByRole('heading', { name: 'Track stock out and back' })).toBeVisible();
+  await expect(page.getByLabel('Demo mode')).toContainText('sample data, nothing is saved');
+  await expect(page.getByRole('button', { name: 'Reset demo' })).toBeVisible();
+});
+
+test('client navigation updates social metadata and moves focus to the new heading', async ({ page }) => {
+  await page.goto('/');
+  await page.getByLabel('Main navigation').getByRole('link', { name: 'Privacy' }).click();
+  await expect(page).toHaveTitle('Privacy — Stock Return Trail');
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Privacy — Stock Return Trail');
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://stock-return-trail.sociobot.in/privacy');
+  await expect(page.getByRole('heading', { name: 'Your stock records stay on your device' })).toBeFocused();
 });
 
 test('does not advertise a checkout that is unavailable', async ({ page }) => {

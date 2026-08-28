@@ -54,5 +54,19 @@
     "where": "landing limits, settings, privacy, and README",
     "test": "npm test -- --grep @claim:json-backup",
     "sandbox": "fresh /demo state; download JSON, assert jobs and movements, then import that file and confirm replacement"
+  },
+  {
+    "id": "no-analytics",
+    "claim": "The app has no analytics.",
+    "where": "README",
+    "test": "npm test -- --grep @claim:no-analytics",
+    "sandbox": "fresh browser context; visit the landing page and complete the /demo sample flow while recording requests, beacons, and off-origin traffic"
+  },
+  {
+    "id": "scope-boundary",
+    "claim": "Stock Return Trail does not price stock, place orders, or sync teams.",
+    "where": "landing limits section",
+    "test": "npm test -- --grep @claim:scope-boundary",
+    "sandbox": "fresh /demo context; exercise the sample flow, inspect all public routes for pricing, ordering, and team-sync controls, and assert no sync request leaves the site"
   }
 ]

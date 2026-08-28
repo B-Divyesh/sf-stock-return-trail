@@ -1,4 +1,4 @@
-const VERSION = 'stock-return-trail-v3';
+const VERSION = 'stock-return-trail-v4';
 const PRECACHE = /*__PRECACHE__*/[];
 const SHELL = ['/', '/app', '/demo', '/log', '/settings', '/privacy', '/terms', '/manifest.webmanifest', '/icons/favicon.svg', '/assets/hero-topographic.webp', ...PRECACHE];
 

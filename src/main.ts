@@ -12,8 +12,8 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 const routeMeta: Record<string, { title: string; description: string }> = {
   '/': { title: 'Stock Return Trail — Return job stock to its origin', description: 'Record stock sent to a job, count what was used, and return each remainder to its saved origin.' },
-  '/demo': { title: 'Demo — Stock Return Trail', description: 'Try a ready-to-close stock return with sample data.' },
-  '/app': { title: 'Jobs — Stock Return Trail', description: 'Record stock leaving a store and close each job with returns.' },
+  '/demo': { title: 'Demo — Stock Return Trail', description: 'Try a sample job that is ready to finish.' },
+  '/app': { title: 'Jobs — Stock Return Trail', description: 'Record stock leaving an origin and finish each job with returns.' },
   '/log': { title: 'Movement log — Stock Return Trail', description: 'Review and export your local stock movement log.' },
   '/settings': { title: 'Backup — Stock Return Trail', description: 'Back up and restore your local Stock Return Trail records.' },
   '/privacy': { title: 'Privacy — Stock Return Trail', description: 'How Stock Return Trail stores and handles your data.' },
@@ -27,6 +27,7 @@ const fmtDate = (value: string) => new Intl.DateTimeFormat('en-GB', { dateStyle:
 
 function currentPath() {
   const path = location.pathname.replace(/\/$/, '') || '/';
+  if (path === '/' && new URLSearchParams(location.search).get('demo') === '1') return '/demo';
   return routeMeta[path] ? path : '/404';
 }
 
@@ -34,7 +35,14 @@ function setMeta(path: string) {
   const meta = routeMeta[path];
   document.title = meta.title;
   document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description);
-  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://stock-return-trail.sociobot.in${path === '/' ? '/' : path}`);
+  const url = `https://stock-return-trail.sociobot.in${path === '/' ? '/' : path}`;
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', meta.title);
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', meta.description);
+  document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', meta.title);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', meta.description);
+  document.querySelector('meta[name="robots"]')?.setAttribute('content', path === '/404' ? 'noindex,nofollow' : 'index,follow');
 }
 
 function iconMark() {
@@ -49,7 +57,7 @@ function shell(content: string) {
     <header class="site-header">
       <a class="wordmark" href="/" aria-label="Stock Return Trail home">${iconMark()}<span>Stock Return Trail</span></a>
       <nav aria-label="Main navigation">
-        <a href="/demo">Demo</a><a href="/app">Jobs</a><a href="/log">Trail log</a><a href="/privacy">Privacy</a>
+        <a href="/demo">Demo</a><a href="/app">Jobs</a><a href="/log">Movement log</a><a href="/privacy">Privacy</a>
       </nav>
     </header>
     <div id="network-state" class="network-state" role="status" hidden>You are offline. Saved records still work.</div>
@@ -67,25 +75,25 @@ function homePage() {
   return shell(`
     <section class="hero contour-field">
       <div class="hero-copy">
-        <p class="eyebrow">Field stock · plotted home</p>
+        <p class="eyebrow">Job stock returns</p>
         <h1 tabindex="-1">Return job stock to the right place</h1>
-        <p class="lede">For field teams who need each unused item sent back without searching old movement records.</p>
-        <div class="hero-action"><a class="button primary" href="/demo">Try it with sample data</a><span>Open a ready-to-close job. Nothing is saved.</span></div>
+        <p class="lede">For field teams who return unused items without searching the movement log.</p>
+        <div class="hero-action"><a class="button primary" href="/demo">Try it with sample data</a><span>Open a job ready to finish. Nothing is saved.</span></div>
         <ul class="plain-facts" aria-label="Product facts"><li>Works offline after your first visit.</li><li>Your stock records stay in this browser.</li><li>Use it without an account or a job limit.</li></ul>
       </div>
       <figure class="hero-art"><picture><source srcset="/assets/hero-topographic.avif" type="image/avif"><img src="/assets/hero-topographic.webp" width="900" height="600" fetchpriority="high" alt="A field parts case connected to its stockroom by a red route line."></picture><figcaption>Each item keeps its origin while it is out on a job.</figcaption></figure>
     </section>
     <section class="live-preview section-rule" aria-labelledby="preview-title">
-      <div class="section-heading"><p class="eyebrow">Live closeout preview</p><h2 id="preview-title">See every return before you move it</h2><p>The job sheet subtracts used stock and groups the remainder by origin.</p></div>
-      <div class="preview-sheet" aria-label="Example closeout sheet">
+      <div class="section-heading"><p class="eyebrow">Live return preview</p><h2 id="preview-title">See every return before you move it</h2><p>The job sheet subtracts used stock and groups the remainder by origin.</p></div>
+      <div class="preview-sheet" aria-label="Example return sheet">
         <div class="preview-route" aria-hidden="true"><span>Origin</span><i></i><span>Job</span><i></i><span>Return</span></div>
         <div class="preview-row"><span><b>VAL-22</b> Isolation valve</span><span>6 out − 2 used</span><strong>4 → Bin B4</strong></div>
         <div class="preview-row"><span><b>CBL-3C</b> 3-core flex</span><span>4 out − 1 used</span><strong>3 → Cable rack</strong></div>
-        <a class="text-link" href="/demo">Close the sample job →</a>
+        <a class="text-link" href="/demo">Finish the sample job →</a>
       </div>
     </section>
-    <section class="how section-rule" aria-labelledby="how-title"><div class="section-heading"><p class="eyebrow">Three field marks</p><h2 id="how-title">How the trail works</h2></div><ol class="steps"><li><span>01</span><h3>Record stock out</h3><p>Scan or enter a code. Add its count and store location.</p></li><li><span>02</span><h3>Count what was used</h3><p>At closeout, enter the used count for each stock line.</p></li><li><span>03</span><h3>Return the remainder</h3><p>The sheet names each origin and adds the moves to your CSV log.</p></li></ol></section>
-    <section class="limits section-rule" aria-labelledby="limits-title"><div><p class="eyebrow">A narrow tool on purpose</p><h2 id="limits-title">A return trail, not an accounts system</h2></div><div><p>Stock Return Trail does not price stock, place orders, or sync teams.</p><p>Movement logs help with field closeout. They are not audit-grade inventory valuation.</p><p>You can export CSV and JSON backups at any time.</p></div></section>
+    <section class="how section-rule" aria-labelledby="how-title"><div class="section-heading"><p class="eyebrow">Three steps</p><h2 id="how-title">How the trail works</h2></div><ol class="steps"><li><span>01</span><h3>Record stock out</h3><p>Scan or enter a code. Add its count and origin.</p></li><li><span>02</span><h3>Count what was used</h3><p>When you finish a job, enter the used count for each stock line.</p></li><li><span>03</span><h3>Return the remainder</h3><p>The sheet names each origin and adds each move to your movement log.</p></li></ol></section>
+    <section class="limits section-rule" aria-labelledby="limits-title"><div><p class="eyebrow">A narrow tool on purpose</p><h2 id="limits-title">A return trail, not an accounts system</h2></div><div><p>Stock Return Trail does not price stock, place orders, or sync teams.</p><p>Use the movement log when you finish a field job. Do not use it for accounting or formal stock audits.</p><p>You can export CSV and JSON backups at any time.</p></div></section>
   `);
 }
 
@@ -95,7 +103,7 @@ function appPage() {
   if (active) activeJobId = active.id;
   const jobContent = active ? jobPanel(active) : `<section class="empty-state"><div class="contour-pin" aria-hidden="true">＋</div><h2>No jobs are on the trail</h2><p>Create a job, then add stock as it leaves its origin.</p><button class="button primary" data-action="show-job-form">Create your first job</button></section>`;
   return shell(`
-    <section class="app-head"><div><p class="eyebrow">Field board</p><h1 tabindex="-1">Track stock out and back</h1><p>${isDemo ? 'This sample job is ready for closeout.' : 'Each stock line keeps the origin you record.'}</p></div><button class="button secondary" data-action="show-job-form">Create job</button></section>
+    <section class="app-head"><div><p class="eyebrow">Field board</p><h1 tabindex="-1">Track stock out and back</h1><p>${isDemo ? 'This sample job is ready to finish.' : 'Each stock line keeps the origin you record.'}</p></div><button class="button secondary" data-action="show-job-form">Create job</button></section>
     <div class="job-layout">
       <aside class="job-rail" aria-label="Jobs"><div class="rail-title"><h2>Jobs</h2><span>${openJobs.length} open</span></div>${state.jobs.length ? `<div class="job-list">${state.jobs.map((job) => `<button class="job-tab ${job.id === active?.id ? 'active' : ''}" data-job="${job.id}" aria-pressed="${job.id === active?.id}"><span>${esc(job.name)}</span><small>${job.status === 'open' ? `${job.lines.length} stock lines` : 'Closed'}</small></button>`).join('')}</div>` : '<p class="rail-empty">Created jobs appear here.</p>'}</aside>
       <div class="job-work">${jobContent}</div>
@@ -109,8 +117,8 @@ function jobPanel(job: Job) {
   const isClosed = job.status === 'closed';
   return `<article class="job-sheet">
     <header class="job-sheet-head"><div><p class="eyebrow">${isClosed ? 'Closed trail' : 'Open trail'}</p><h2>${esc(job.name)}</h2><p>${esc(job.site)} · started ${fmtDate(job.createdAt)}</p></div><span class="status-chip ${isClosed ? 'closed' : ''}">${isClosed ? '✓ Closed' : '● Open'}</span></header>
-    <div class="route-strip" tabindex="0" aria-label="Movement route"><span><small>FROM</small>Saved origins</span><i aria-hidden="true"></i><span><small>AT</small>${esc(job.site)}</span><i aria-hidden="true"></i><span><small>BACK</small>${isClosed ? 'Returns recorded' : 'Ready at closeout'}</span></div>
-    ${job.lines.length ? `<form id="closeout-form"><div class="stock-table"><div class="stock-head"><span>Stock</span><span>Origin</span><span>${isClosed ? 'Used' : 'Used now'}</span><span>Return</span></div>${job.lines.map((line) => stockRow(line, isClosed)).join('')}</div>${isClosed ? `<div class="complete-panel"><strong>Return trail saved</strong><p>The movement log now includes used and returned counts.</p><a class="button secondary" href="/log">Open trail log</a></div>` : `<div class="closeout-bar"><p><strong>Closeout check</strong><span>Enter used counts, then record every return.</span></p><button class="button primary" data-action="close-job">Record returns &amp; close job</button></div>`}</form>` : `<div class="inline-empty"><h3>No stock is on this job</h3><p>Add the first item as it leaves a store.</p></div>`}
+    <div class="route-strip" tabindex="0" aria-label="Movement route"><span><small>FROM</small>Saved origins</span><i aria-hidden="true"></i><span><small>AT</small>${esc(job.site)}</span><i aria-hidden="true"></i><span><small>BACK</small>${isClosed ? 'Returns recorded' : 'Ready to finish'}</span></div>
+    ${job.lines.length ? `<form id="closeout-form"><div class="stock-table"><div class="stock-head"><span>Stock</span><span>Origin</span><span>${isClosed ? 'Used' : 'Used now'}</span><span>Return</span></div>${job.lines.map((line) => stockRow(line, isClosed)).join('')}</div>${isClosed ? `<div class="complete-panel"><strong>Return trail saved</strong><p>The movement log now includes used and returned counts.</p><a class="button secondary" href="/log">Open movement log</a></div>` : `<div class="closeout-bar"><p><strong>Finish job</strong><span>Enter used counts, then record every return.</span></p><button class="button primary" data-action="close-job">Record returns &amp; finish job</button></div>`}</form>` : `<div class="inline-empty"><h3>No stock is on this job</h3><p>Add the first item as it leaves an origin.</p></div>`}
     ${!isClosed ? `<form id="stock-form" class="stock-form"><div class="form-title"><div><p class="eyebrow">Stock out</p><h3>Add stock to this job</h3></div><button class="button scan-button" type="button" data-action="scan-code">⌁ Scan code</button></div><div class="field-grid"><label>Stock code<input name="code" required maxlength="30" autocomplete="off" placeholder="VAL-22"></label><label>Item name<input name="name" required maxlength="80" autocomplete="off" placeholder="Isolation valve"></label><label>Count<input name="quantity" required type="number" min="1" max="99999" step="1" inputmode="numeric" value="1"></label><label>Origin<input name="origin" required maxlength="80" autocomplete="off" placeholder="Main stores · Bin B4"></label></div><p class="form-error" id="stock-error" role="alert"></p><button class="button secondary" type="submit">Add stock out</button></form>` : ''}
   </article>`;
 }
@@ -122,7 +130,7 @@ function stockRow(line: StockLine, closed: boolean) {
 
 function logPage() {
   const rows = [...state.movements].reverse();
-  return shell(`<section class="page-head"><div><p class="eyebrow">Movement record</p><h1 tabindex="-1">Review the stock trail</h1><p>Every stock-out, use, and return stays in this browser.</p></div><button class="button primary" data-action="export-csv" ${rows.length ? '' : 'disabled'}>Export CSV</button></section>${rows.length ? `<div class="log-wrap"><table><caption>${rows.length} recorded movements</caption><thead><tr><th>Date</th><th>Job</th><th>Item</th><th>Move</th><th>Count</th><th>From → to</th></tr></thead><tbody>${rows.map((move) => `<tr><td>${fmtDate(move.at)}</td><td>${esc(move.jobName)}</td><td><b>${esc(move.itemCode)}</b><br>${esc(move.itemName)}</td><td><span class="move-chip ${move.kind}">${move.kind === 'out' ? 'Stock out' : move.kind === 'used' ? 'Used' : 'Returned'}</span></td><td>${move.quantity}</td><td>${esc(move.from)} → ${esc(move.to)}</td></tr>`).join('')}</tbody></table></div>` : `<section class="empty-state"><div class="contour-pin" aria-hidden="true">↝</div><h2>No movements are recorded</h2><p>Add stock to a job. Its route will appear here.</p><a class="button primary" href="/app">Open jobs</a></section>`}<p class="valuation-note"><strong>Record note:</strong> This movement log is for field closeout. It is not audit-grade inventory valuation.</p>`);
+  return shell(`<section class="page-head"><div><p class="eyebrow">Movement log</p><h1 tabindex="-1">Review the movement log</h1><p>Every stock-out, use, and return stays in this browser.</p></div><button class="button primary" data-action="export-csv" ${rows.length ? '' : 'disabled'}>Export CSV</button></section>${rows.length ? `<div class="log-wrap"><table><caption>${rows.length} recorded movements</caption><thead><tr><th>Date</th><th>Job</th><th>Item</th><th>Move</th><th>Count</th><th>From → to</th></tr></thead><tbody>${rows.map((move) => `<tr><td>${fmtDate(move.at)}</td><td>${esc(move.jobName)}</td><td><b>${esc(move.itemCode)}</b><br>${esc(move.itemName)}</td><td><span class="move-chip ${move.kind}">${move.kind === 'out' ? 'Stock out' : move.kind === 'used' ? 'Used' : 'Returned'}</span></td><td>${move.quantity}</td><td>${esc(move.from)} → ${esc(move.to)}</td></tr>`).join('')}</tbody></table></div>` : `<section class="empty-state"><div class="contour-pin" aria-hidden="true">↝</div><h2>No movements are recorded</h2><p>Add stock to a job. Its route will appear here.</p><a class="button primary" href="/app">Open jobs</a></section>`}<p class="valuation-note"><strong>Record note:</strong> Use this movement log when you finish a field job. Do not use it for accounting or formal stock audits.</p>`);
 }
 
 function settingsPage() {
@@ -130,11 +138,11 @@ function settingsPage() {
 }
 
 function privacyPage() {
-  return shell(`<article class="prose"><p class="eyebrow">Plain privacy</p><h1 tabindex="-1">Your stock records stay on your device</h1><p class="lede">Stock Return Trail keeps jobs and movements in your browser’s IndexedDB storage.</p><h2>What stays local</h2><p>Job names, locations, stock codes, counts, and movement logs stay in your browser. Demo records use a separate database and are discarded when you reset the demo.</p><h2>When the network is used</h2><p>The app downloads its files on your first visit. It does not send stock records to a server.</p><h2>Your choices</h2><p>You can export a JSON backup or CSV log. Clearing site data removes local records. We cannot recover records you have not backed up.</p><h2>Contact</h2><p>For privacy questions, email <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
+  return shell(`<article class="prose"><p class="eyebrow">Plain privacy</p><h1 tabindex="-1">Your stock records stay on your device</h1><p class="lede">Stock Return Trail keeps jobs and movements in your browser’s IndexedDB storage.</p><h2>What stays local</h2><p>Job names, locations, stock codes, counts, and movement logs stay in your browser. Demo records use a separate database and are discarded when you reset the demo.</p><h2>When the network is used</h2><p>The app downloads its files on your first visit. It does not send stock records to a server.</p><h2>Your choices</h2><p>You can export a JSON backup or movement log as CSV. Clearing site data removes local records. We cannot recover records you have not backed up.</p><h2>Contact</h2><p>For privacy questions, email <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
 }
 
 function termsPage() {
-  return shell(`<article class="prose"><p class="eyebrow">Use terms</p><h1 tabindex="-1">Use the trail as a field record</h1><p class="lede">These terms cover Stock Return Trail.</p><h2>The tool</h2><p>Stock Return Trail records movements you enter. It does not verify physical stock or provide audit-grade inventory valuation.</p><h2>Your responsibility</h2><p>Check counts and origins before moving stock. Keep backups you need. Do not rely on the app as your only legal or accounting record.</p><h2>Availability</h2><p>The software is provided as-is under the MIT license. We may fix or change it without promising continuous service.</p><h2>Contact</h2><p>For terms questions, email <a href="mailto:support@sociobot.in">support@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
+  return shell(`<article class="prose"><p class="eyebrow">Use terms</p><h1 tabindex="-1">Use the trail as a field record</h1><p class="lede">These terms cover Stock Return Trail.</p><h2>The tool</h2><p>Stock Return Trail records movements you enter. Do not use it for accounting or formal stock audits.</p><h2>Your responsibility</h2><p>Check counts and origins before moving stock. Keep backups you need. Do not rely on the app as your only legal or accounting record.</p><h2>Availability</h2><p>The software is provided as-is under the MIT license. We may fix or change it without promising continuous service.</p><h2>Contact</h2><p>For terms questions, email <a href="mailto:support@sociobot.in">support@sociobot.in</a>.</p><p>Last updated: 28 August 2026.</p></article>`);
 }
 
 function notFoundPage() {
@@ -311,7 +319,7 @@ async function closeJob() {
   job.closedAt = new Date().toISOString();
   await saveState(isDemo, state);
   await render();
-  showToast(`${job.name} closed. Returns were added to the trail log.`);
+  showToast(`${job.name} finished. Returns were added to the movement log.`);
 }
 
 function csvText() {
@@ -327,7 +335,7 @@ function download(name: string, contents: string, type: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function exportCsv() { download('stock-return-trail.csv', csvText(), 'text/csv;charset=utf-8'); showToast('CSV log exported.'); }
+function exportCsv() { download('stock-return-trail.csv', csvText(), 'text/csv;charset=utf-8'); showToast('Movement log exported as CSV.'); }
 function exportJson() { download('stock-return-trail-backup.json', JSON.stringify(state, null, 2), 'application/json'); showToast('JSON backup downloaded.'); }
 
 async function handleImport(event: Event) {

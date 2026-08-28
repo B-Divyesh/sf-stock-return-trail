@@ -18,4 +18,19 @@ describe('static-host cache policy', () => {
     expect(config.mimeTypes['.avif']).toBe('image/avif');
     expect(config.mimeTypes['.webmanifest']).toBe('application/manifest+json');
   });
+
+  it('uses real emitted pages for known routes and reserves a status-404 override for unknown paths', () => {
+    const config = JSON.parse(readFileSync(resolve(process.cwd(), 'public/staticwebapp.config.json'), 'utf8')) as {
+      navigationFallback?: unknown;
+      responseOverrides: Record<string, { rewrite: string }>;
+      routes: Array<{ route: string; rewrite?: string }>;
+    };
+    expect(config.navigationFallback).toBeUndefined();
+    expect(config.responseOverrides['404']).toEqual({ rewrite: '/404.html' });
+    const source = readFileSync(resolve(process.cwd(), 'scripts/prerender-routes.mjs'), 'utf8');
+    for (const route of ['/demo', '/app', '/log', '/settings', '/privacy', '/terms']) {
+      expect(source).toContain(`'${route}'`);
+      expect(config.routes.find((item) => item.route === route)?.rewrite).toBe(`${route}/index.html`);
+    }
+  });
 });

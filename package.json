@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node scripts/inject-sw.mjs && cp dist/index.html dist/404.html",
+    "build": "tsc && vite build && node scripts/inject-sw.mjs && node scripts/prerender-routes.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "test": "npm run build && playwright test",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "test:static": "npm run build && node scripts/check-static-output.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
