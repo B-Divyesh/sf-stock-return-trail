@@ -50,11 +50,7 @@ test('@claim:stock-code-entry supports manual entry and camera detection', async
     Object.defineProperty(navigator.mediaDevices, 'getUserMedia', { value: async () => new MediaStream() });
     HTMLMediaElement.prototype.play = async () => {};
   });
-  await page.goto('/app');
-  await page.getByRole('button', { name: 'Create your first job' }).click();
-  await page.getByLabel('Job name').fill('North wing repair');
-  await page.getByLabel('Temporary location').fill('North wing roof');
-  await page.getByRole('button', { name: 'Create job', exact: true }).last().click();
+  await page.goto('/demo');
   await page.getByRole('button', { name: 'Scan code' }).click();
   await expect(page.getByLabel('Stock code')).toHaveValue('SCAN-123');
   await page.getByLabel('Stock code').fill('SEAL-40');
@@ -69,7 +65,23 @@ test('@claim:stock-code-entry supports manual entry and camera detection', async
 test('mobile layout keeps primary controls visible', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/demo');
-  await expect(page.getByRole('button', { name: 'Record returns & close job' })).toBeVisible();
+  const essentialControls = [
+    ['job sheet', page.locator('.job-sheet')],
+    ['route strip', page.locator('.route-strip')],
+    ['closeout bar', page.locator('.closeout-bar')],
+    ['close job button', page.getByRole('button', { name: 'Record returns & close job' })],
+  ] as const;
+  for (const [name, control] of essentialControls) {
+    await expect(control).toBeVisible();
+    const box = await control.boundingBox();
+    expect(box, `missing ${name} bounding box`).not.toBeNull();
+    expect(box!.x, `${name} starts outside the viewport`).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width, `${name} extends beyond the 390px viewport`).toBeLessThanOrEqual(390);
+  }
+  const routeStrip = page.locator('.route-strip');
+  await routeStrip.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(() => routeStrip.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
   await expect(page.locator('body')).not.toHaveCSS('overflow-x', 'scroll');
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact || ''))).toEqual([]);

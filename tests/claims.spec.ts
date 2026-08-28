@@ -49,15 +49,14 @@ test('@claim:demo-isolation keeps real records empty', async ({ page }) => {
 });
 
 test('@claim:no-account-job-limit allows a field team to create more than two open jobs without a purchase gate', async ({ page }) => {
-  await page.goto('/app');
+  await page.goto('/demo');
   for (const number of [1, 2, 3]) {
-    if (number === 1) await page.getByRole('button', { name: 'Create your first job' }).click();
-    else await page.locator('.app-head').getByRole('button', { name: 'Create job' }).click();
+    await page.locator('.app-head').getByRole('button', { name: 'Create job' }).click();
     await page.getByLabel('Job name').fill(`Job ${number}`);
     await page.getByLabel('Temporary location').fill(`Site ${number}`);
     await page.getByRole('button', { name: 'Create job', exact: true }).last().click();
   }
-  await expect(page.getByText('3 open')).toBeVisible();
+  await expect(page.getByText('4 open')).toBeVisible();
 });
 
 test('@claim:json-backup contains jobs and movements', async ({ page }) => {

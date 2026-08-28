@@ -109,7 +109,7 @@ function jobPanel(job: Job) {
   const isClosed = job.status === 'closed';
   return `<article class="job-sheet">
     <header class="job-sheet-head"><div><p class="eyebrow">${isClosed ? 'Closed trail' : 'Open trail'}</p><h2>${esc(job.name)}</h2><p>${esc(job.site)} · started ${fmtDate(job.createdAt)}</p></div><span class="status-chip ${isClosed ? 'closed' : ''}">${isClosed ? '✓ Closed' : '● Open'}</span></header>
-    <div class="route-strip" aria-label="Movement route"><span><small>FROM</small>Saved origins</span><i aria-hidden="true"></i><span><small>AT</small>${esc(job.site)}</span><i aria-hidden="true"></i><span><small>BACK</small>${isClosed ? 'Returns recorded' : 'Ready at closeout'}</span></div>
+    <div class="route-strip" tabindex="0" aria-label="Movement route"><span><small>FROM</small>Saved origins</span><i aria-hidden="true"></i><span><small>AT</small>${esc(job.site)}</span><i aria-hidden="true"></i><span><small>BACK</small>${isClosed ? 'Returns recorded' : 'Ready at closeout'}</span></div>
     ${job.lines.length ? `<form id="closeout-form"><div class="stock-table"><div class="stock-head"><span>Stock</span><span>Origin</span><span>${isClosed ? 'Used' : 'Used now'}</span><span>Return</span></div>${job.lines.map((line) => stockRow(line, isClosed)).join('')}</div>${isClosed ? `<div class="complete-panel"><strong>Return trail saved</strong><p>The movement log now includes used and returned counts.</p><a class="button secondary" href="/log">Open trail log</a></div>` : `<div class="closeout-bar"><p><strong>Closeout check</strong><span>Enter used counts, then record every return.</span></p><button class="button primary" data-action="close-job">Record returns &amp; close job</button></div>`}</form>` : `<div class="inline-empty"><h3>No stock is on this job</h3><p>Add the first item as it leaves a store.</p></div>`}
     ${!isClosed ? `<form id="stock-form" class="stock-form"><div class="form-title"><div><p class="eyebrow">Stock out</p><h3>Add stock to this job</h3></div><button class="button scan-button" type="button" data-action="scan-code">⌁ Scan code</button></div><div class="field-grid"><label>Stock code<input name="code" required maxlength="30" autocomplete="off" placeholder="VAL-22"></label><label>Item name<input name="name" required maxlength="80" autocomplete="off" placeholder="Isolation valve"></label><label>Count<input name="quantity" required type="number" min="1" max="99999" step="1" inputmode="numeric" value="1"></label><label>Origin<input name="origin" required maxlength="80" autocomplete="off" placeholder="Main stores · Bin B4"></label></div><p class="form-error" id="stock-error" role="alert"></p><button class="button secondary" type="submit">Add stock out</button></form>` : ''}
   </article>`;
@@ -188,11 +188,18 @@ function bindEvents() {
   }));
   document.querySelectorAll<HTMLElement>('[data-action]').forEach((element) => element.addEventListener('click', handleAction));
   document.querySelectorAll<HTMLButtonElement>('[data-job]').forEach((button) => button.addEventListener('click', () => { activeJobId = button.dataset.job!; void render(); }));
+  document.querySelector<HTMLElement>('.route-strip')?.addEventListener('keydown', scrollRouteStrip);
   document.querySelector<HTMLFormElement>('#job-form')?.addEventListener('submit', createJob);
   document.querySelector<HTMLFormElement>('#stock-form')?.addEventListener('submit', addStock);
   document.querySelectorAll<HTMLInputElement>('.used-input').forEach((input) => input.addEventListener('input', updateReturnCount));
   document.querySelectorAll<HTMLInputElement>('#job-form input, #stock-form input').forEach((input) => input.addEventListener('input', () => input.setCustomValidity('')));
   document.querySelector<HTMLInputElement>('#import-file')?.addEventListener('change', handleImport);
+}
+
+function scrollRouteStrip(event: KeyboardEvent) {
+  if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+  event.preventDefault();
+  (event.currentTarget as HTMLElement).scrollBy({ left: event.key === 'ArrowRight' ? 120 : -120, behavior: reducedMotion ? 'auto' : 'smooth' });
 }
 
 async function handleAction(event: Event) {

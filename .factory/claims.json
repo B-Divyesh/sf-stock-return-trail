@@ -25,7 +25,7 @@
     "claim": "Stock codes can be entered by hand or scanned when the browser supports camera barcode detection.",
     "where": "landing workflow, job form, and README",
     "test": "npm test -- --grep @claim:stock-code-entry",
-    "sandbox": "fresh real workspace; exercise manual entry and a stubbed BarcodeDetector returning a known code"
+    "sandbox": "fresh /demo state; exercise manual entry and a stubbed BarcodeDetector returning a known code in the isolated sample namespace"
   },
   {
     "id": "local-records",
@@ -46,7 +46,7 @@
     "claim": "Use it without an account or a job limit.",
     "where": "landing facts and README",
     "test": "npm test -- --grep @claim:no-account-job-limit",
-    "sandbox": "fresh real workspace; create three open jobs without signing in or seeing a purchase gate"
+    "sandbox": "fresh /demo state; create three additional open jobs in the isolated sample namespace without signing in or seeing a purchase gate"
   },
   {
     "id": "json-backup",

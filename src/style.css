@@ -137,7 +137,8 @@ main { overflow: clip; }
 .job-tab span { font-weight: 700; }
 .job-tab small { margin-top: 4px; color: var(--muted); }
 .job-tab.active { border-left-color: var(--route); background: var(--paper-deep); }
-.job-sheet { background: var(--white); box-shadow: 0 14px 40px rgba(23, 60, 53, .1); clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%); }
+.job-work, .job-sheet { min-width: 0; }
+.job-sheet { max-width: 100%; background: var(--white); box-shadow: 0 14px 40px rgba(23, 60, 53, .1); clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%); }
 .job-sheet-head { padding: 28px 32px 24px; display: flex; justify-content: space-between; gap: 24px; }
 .job-sheet-head h2 { font-size: 2rem; margin-bottom: 8px; }
 .job-sheet-head p:last-child { color: var(--muted); margin-bottom: 0; }
@@ -259,7 +260,7 @@ td { padding: 16px 12px; border-bottom: 1px dashed var(--line); vertical-align: 
   .app-head .button, .page-head .button { width: 100%; }
   .job-layout { padding: 0 12px; margin-bottom: 64px; }
   .job-sheet-head { padding: 24px 20px 18px; flex-direction: column; gap: 10px; }
-  .route-strip { padding: 16px 20px; overflow-x: auto; grid-template-columns: 100px 50px 140px 50px 130px; }
+  .route-strip { min-width: 0; max-width: 100%; padding: 16px 20px; overflow-x: auto; grid-template-columns: 100px 50px 140px 50px 130px; }
   .stock-table { padding: 8px 20px; }
   .stock-head { display: none; }
   .stock-row { grid-template-columns: 1fr 90px; gap: 16px; padding: 20px 0; }
@@ -269,7 +270,8 @@ td { padding: 16px 12px; border-bottom: 1px dashed var(--line); vertical-align: 
   .return-cell { grid-column: 2; grid-row: 1; }
   .stock-row label { grid-column: 1; grid-row: 3; }
   .return-cell { grid-row: 3; }
-  .closeout-bar { padding: 20px; align-items: stretch; flex-direction: column; }
+  .closeout-bar { min-width: 0; max-width: 100%; padding: 20px; align-items: stretch; flex-direction: column; }
+  .closeout-bar .button { width: 100%; max-width: 100%; }
   .stock-form { padding: 28px 20px; }
   .form-title { flex-direction: column; }
   .form-title .button { width: 100%; }

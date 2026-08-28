@@ -1,23 +1,41 @@
-# Stock Return Trail verification handoff
+# Stock Return Trail repair handoff
 
-## Result: FAIL
+## Result
 
-Independent verification of candidate `1c87f3bf63da794568e2d50bc9d1fe22c392dd2d` at https://stock-return-trail.sociobot.in completed on 2026-08-28. The live artifact is byte-identical to a fresh local production build, so there is no deployment-only mismatch.
+**Local release verification: PASS.** This repair addresses every release blocker recorded in verifier reports `.factory/verification-1.md` and `.factory/verification-2.md` for candidate `1c87f3bf63da794568e2d50bc9d1fe22c392dd2d`.
 
-The candidate must not release yet. At 390 px the demo job sheet is 550 px wide and clipped by `main { overflow: clip; }`; the core **Record returns & close job** button is 510 px wide and extends from x=32 to x=542 in a 390 px viewport. Two declared claim tests also use `/app` rather than the required isolated `/demo` entry point.
+## Repairs
 
-## What passed
+1. **390 px closeout containment:** the job work area and job sheet now opt into shrinking (`min-width: 0`, bounded to `100%`). The route strip scrolls inside that bounded sheet; the closeout bar and primary close button are bounded and fill the available mobile width. At 390 px, measured local boxes are: job sheet 366 px (`x=12–378`), route strip 366 px (`x=12–378`), closeout bar 366 px (`x=12–378`), and **Record returns & close job** 326 px (`x=32–358`).
+2. **Keyboard route strip:** because the bounded route strip can scroll on a phone, it is focusable and Arrow Left/Right now scroll it. The mobile Playwright regression focuses the strip, presses Arrow Right, and asserts `scrollLeft > 0`.
+3. **Demo-only claims:** `@claim:stock-code-entry` and `@claim:no-account-job-limit` now begin at `/demo` and operate only in the sample IndexedDB namespace. Their `.factory/claims.json` sandbox descriptions now match this behavior. The existing real-workspace behavior remains covered by non-claim workflow tests.
+4. **AVIF response policy:** `public/staticwebapp.config.json` maps `.avif` to `image/avif`; the static-host unit test asserts that mapping alongside the existing cache rules.
 
-- `npm ci`, all eight individual claim commands, `npm run test:unit` (4 tests), `npm test` (17 Chromium tests), and the exact `npm run build` command.
-- Cold first-read and one-click sample demo requirements.
-- Live normal return closeout, CSV export, invalid-count recovery, Axe serious/critical scans, keyboard skip navigation, focus visibility, reduced motion, offline reload, service-worker control/update path, local-only requests, headers/caching, and live-to-local artifact hashes.
-- Live Lighthouse `/demo`: Performance 100, Accessibility 100, Best Practices 100, SEO 100; LCP 1.053 s and CLS 0.034.
+## Verification evidence
 
-## Required repair and re-verification
+- Clean dependency install: `npm ci` — pass (96 packages, 0 vulnerabilities).
+- Unit/type/static policy: `npm run test:unit` — pass, 4 tests. `npm run build` — pass; TypeScript typecheck is part of the build.
+- Complete browser suite: `npm test` — pass, 17 Chromium tests. This covers desktop and 390 × 844 mobile, closeout, validation recovery, keyboard skip navigation, route-strip arrow scrolling, focus sizing, privacy/network isolation, offline reload, demo isolation, backup, CSV, and serious/critical Axe findings.
+- Claims: every command declared in `.factory/claims.json` was run as `npm test -- --grep @claim:<id>` for all eight IDs; all passed from fresh browser contexts. The two repaired claim scenarios now enter `/demo`.
+- URL smoke: `VERIFY_NODE_MODULES=/work/repo/node_modules /opt/fleet/lib/verify-url.sh http://127.0.0.1:4173/demo <evidence-dir>` — pass: HTTP 200, title `Demo — Stock Return Trail`, `lang=en`, one H1, main landmark, zero missing image alts, zero unlabeled buttons, and zero console/page errors.
+- Accessibility: the Playwright Axe integration in the complete suite reports zero serious/critical issues on the landing page, app, privacy page, and repaired mobile demo. The mobile route strip is focusable and keyboard-operable.
+- Production build size: JavaScript 29.39 kB (10.25 kB gzip), CSS 19.99 kB (5.67 kB gzip), and self-hosted fonts 53.30 kB total; all within the product budgets.
+- Local mobile Lighthouse `/demo` (Chromium with `--no-sandbox`): Performance 97, Accessibility 100, Best Practices 100, SEO 100; LCP 1,360 ms and CLS 0.030.
 
-1. Constrain the mobile job sheet, route strip, and closeout button so all essential controls are completely visible and usable at 390 px. Add a bounding-box assertion, not only `toBeVisible()`.
-2. Run all claim scenarios from isolated demo storage and update `.factory/claims.json` metadata accordingly.
-3. Configure the AVIF response as `image/avif`.
-4. Rebuild/deploy, then rerun every claim command, unit suite, full suite, build, mobile browser QA, and live verification.
+## Deployment and live verification
 
-See `.factory/verification-2.md` for exact commands, measurements, evidence, and defect severity.
+The artifact remains a static Vite PWA. Deployment is triggered by pushing `main` through the repository’s static deployment configuration. After push, verify the live `/demo` route and `/assets/hero-topographic.avif` response header; the latter must be `Content-Type: image/avif`.
+
+## Known gaps / next steps
+
+No product gaps are known. The only pending step at the time this file was written is the post-push live deployment check.
+
+## Run locally
+
+```sh
+npm ci
+npm run test:unit
+npm test
+npm run build
+npm run preview
+```

@@ -26,5 +26,8 @@
       "headers": { "Cache-Control": "public, max-age=300, must-revalidate" }
     }
   ],
-  "mimeTypes": { ".webmanifest": "application/manifest+json" }
+  "mimeTypes": {
+    ".avif": "image/avif",
+    ".webmanifest": "application/manifest+json"
+  }
 }
