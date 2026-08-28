@@ -1,0 +1,159 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/demo",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Demo — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/app",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Jobs — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/log",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Movement log — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/settings",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Backup — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/privacy",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Privacy — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/terms",
+      "viewport": 1440,
+      "status": 200,
+      "title": "Terms — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/does-not-exist",
+      "viewport": 1440,
+      "status": 404,
+      "title": "Page not found — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/",
+      "viewport": 390,
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/demo",
+      "viewport": 390,
+      "status": 200,
+      "title": "Demo — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/app",
+      "viewport": 390,
+      "status": 200,
+      "title": "Jobs — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/log",
+      "viewport": 390,
+      "status": 200,
+      "title": "Movement log — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/settings",
+      "viewport": 390,
+      "status": 200,
+      "title": "Backup — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/privacy",
+      "viewport": 390,
+      "status": 200,
+      "title": "Privacy — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/terms",
+      "viewport": 390,
+      "status": 200,
+      "title": "Terms — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    },
+    {
+      "route": "/does-not-exist",
+      "viewport": 390,
+      "status": 404,
+      "title": "Page not found — Stock Return Trail",
+      "h1": 1,
+      "violations": [],
+      "consoleErrors": []
+    }
+  ],
+  "demoQuery": {
+    "title": "Demo — Stock Return Trail",
+    "banner": "Demo — sample data, nothing is saved\nReset demo\nStart for real",
+    "resetVisible": true,
+    "sampleJob": true
+  },
+  "offline": {
+    "title": "Demo — Stock Return Trail",
+    "notice": true,
+    "sampleJob": true
+  }
+}

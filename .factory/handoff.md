@@ -1,29 +1,48 @@
-# Stock Return Trail review 1 handoff
+# Stock Return Trail polish 1 handoff
 
 ## Result
 
-**FAIL.** `.factory/review-1.md` records 15 findings: 2 major unlisted-claim findings and 13 minor metadata, 404, terminology, and plain-language findings. No blocking defect was found. Product code was not modified.
+**PASS.** Repair commit `85201378fe36a3da77cbf92e34b3b579fac9c765` is pushed to `main` and deployed to https://stock-return-trail.sociobot.in. All F-1-1 through F-1-15 findings are closed in `.factory/polish-1.md`.
 
-## What was done
+## What changed
 
-- Reviewed the live site cold at 390×844 and 1440×900.
-- Audited every landing/README sentence plus headings and actions with word counts.
-- Exercised the one-click demo, closeout, Reset, Start for real, IndexedDB isolation, offline reload, and request boundary.
-- Ran all eight claim commands exactly as listed from a clean clone.
-- Rechecked the prior handoff’s mobile, keyboard, demo-claim, AVIF, and deployed-byte assertions.
-- Crawled routes and links; checked raw/client metadata, history focus, 404 behavior, identity, security headers, and assets.
-- Ran the full 17-test Playwright suite, the factory URL verifier, and axe on every route at mobile and desktop sizes.
+- Added two missing claim records and observable, isolated demo tests for analytics absence and product scope.
+- Added direct `?demo=1` sample entry with its isolated banner, reset, and real-workspace exit.
+- Emitted real static HTML for every public route with route-specific raw/client metadata; unknown URLs now return the styled 404 with HTTP 404.
+- Standardised field language around **movement log**, **origin**, and **finish a job**; rewrote all reviewed jargon in product copy and README.
+- Added complete raw-route, all-route accessibility, metadata, and live link/privacy evidence.
 
 ## Verification
+
+Fresh clone (`/tmp/stock-return-trail-clean.5g1hyX`) after `npm ci`:
+
+```sh
+npm run test:unit       # 5 tests passed
+npm run test:static     # 8 raw route pages passed
+npm test                # 22 Playwright tests passed
+```
+
+Every command in `.factory/claims.json` passed individually from that fresh clone: `offline-reload`, `csv-export`, `return-provenance`, `stock-code-entry`, `local-records`, `demo-isolation`, `no-account-job-limit`, `json-backup`, `no-analytics`, and `scope-boundary`.
+
+Post-deploy:
+
+- `verify-url.sh` passed on `/` and `/demo`; no errors, one H1, `lang=en`, main landmark, and complete image alt text. Evidence: `.factory/polish-1-evidence/verify-root/verify.json` and `.factory/polish-1-evidence/verify-demo/verify.json`.
+- Playwright + axe scanned `/`, `/demo`, `/app`, `/log`, `/settings`, `/privacy`, `/terms`, and `/does-not-exist` at 1440 px and 390 px: zero violations; every valid route 200; unknown route 404; direct `?demo=1` and offline demo reload passed. Evidence: `.factory/polish-1-evidence/live-browser-a11y.json`.
+- Live link crawl found all internal links returned 200 and all observed requests stayed same-origin. Evidence: `.factory/polish-1-evidence/live-links-privacy.json`.
+- Lighthouse on live `/demo`: Performance 98, Accessibility 100, Best Practices 100, SEO 100; LCP 1.352 s, CLS 0.030. Evidence: `.factory/polish-1-evidence/lighthouse-live.json`. The runner reported a post-audit Chromium target crash while capturing its final screenshot, but it wrote the complete scored report; independent Playwright checks were error-free.
+
+## Run and deploy
 
 ```sh
 npm ci
 npm test
+npm run test:unit
+npm run test:static
 npm run build
 ```
 
-All commands passed. Detailed live artifacts and claim logs are in `.factory/review-1-evidence/`.
+Deploy `dist/` as the configured static app.
 
-## Work left
+## Known gaps
 
-Resolve every finding in `.factory/review-1.md`, especially the unlisted analytics/scope claims, route-specific raw/social metadata, and soft-404 response. Then rerun the entire review; PASS requires zero findings.
+None in the product. The Lighthouse runner’s final-screenshot crash is a verifier-process caveat only; its completed report and independent live browser checks are retained as evidence.

@@ -1,0 +1,52 @@
+{
+  "links": [
+    {
+      "link": "https://stock-return-trail.sociobot.in/terms#main",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/demo",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/app",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/log",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/privacy",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/terms",
+      "status": 200
+    },
+    {
+      "link": "https://stock-return-trail.sociobot.in/settings",
+      "status": 200
+    }
+  ],
+  "requests": [
+    "https://stock-return-trail.sociobot.in/",
+    "https://stock-return-trail.sociobot.in/assets/index-xBr5vERH.js",
+    "https://stock-return-trail.sociobot.in/assets/index-DejY7Tsb.css",
+    "https://stock-return-trail.sociobot.in/assets/atkinson-hyperlegible-latin-400-normal-BrHNak5F.woff2",
+    "https://stock-return-trail.sociobot.in/assets/hero-topographic.avif",
+    "https://stock-return-trail.sociobot.in/assets/atkinson-hyperlegible-latin-700-normal-GZI4o3u0.woff2",
+    "https://stock-return-trail.sociobot.in/assets/bitter-latin-700-normal-1jQzrEdb.woff2",
+    "https://stock-return-trail.sociobot.in/demo",
+    "https://stock-return-trail.sociobot.in/app",
+    "https://stock-return-trail.sociobot.in/log",
+    "https://stock-return-trail.sociobot.in/settings",
+    "https://stock-return-trail.sociobot.in/privacy",
+    "https://stock-return-trail.sociobot.in/terms"
+  ],
+  "externalRequests": []
+}
