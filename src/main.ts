@@ -10,6 +10,8 @@ captureLicense();
 let license: LicenseState = cachedLicense();
 let activeJobId = '';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const scrollPositions = new Map<string, number>();
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 const routeMeta: Record<string, { title: string; description: string }> = {
   '/': { title: 'Stock Return Trail — Return job stock to its origin', description: 'Record stock sent to a job, count what was used, and return each remainder to its saved origin.' },
@@ -163,6 +165,7 @@ async function render(focus = false) {
 }
 
 function navigate(path: string) {
+  scrollPositions.set(`${location.pathname}${location.search}`, scrollY);
   if (isDemo && path !== '/demo') path += `${path.includes('?') ? '&' : '?'}demo=1`;
   history.pushState({}, '', path);
   void render(true);
@@ -359,11 +362,21 @@ function registerServiceWorker() {
   }).catch(() => { /* The app still works online when registration is blocked. */ });
 }
 
-window.addEventListener('popstate', () => void render(true));
+window.addEventListener('popstate', () => void render(false).then(() => {
+  const heading = root.querySelector<HTMLElement>('h1');
+  heading?.focus({ preventScroll: true });
+  scrollTo({ top: scrollPositions.get(`${location.pathname}${location.search}`) || 0, behavior: 'auto' });
+}));
 window.addEventListener('online', updateNetworkState);
 window.addEventListener('offline', updateNetworkState);
 async function initialise() {
-  await render();
+  try {
+    await render();
+  } catch {
+    root.innerHTML = shell(`<section class="empty-state"><div class="contour-pin" aria-hidden="true">!</div><h1 tabindex="-1">Local records could not open</h1><p>Check that browser storage is allowed, then reload this page.</p><button class="button primary" id="reload-app">Reload the app</button></section>`);
+    document.querySelector('#reload-app')?.addEventListener('click', () => location.reload());
+    return;
+  }
   if (localStorage.getItem('sb_license:stock-return-trail')) {
     const verified = await verifyLicense();
     if (verified.unlocked !== license.unlocked || verified.notice !== license.notice) {

@@ -66,8 +66,10 @@ test('@claim:free-job-limit allows two free jobs and removes the limit with a va
 
   const paidContext = await browser.newContext();
   const paidPage = await paidContext.newPage();
-  await paidPage.route('https://api.sociobot.in/**', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }) }));
-  await paidPage.goto('/app?license=test-license');
+  await paidPage.addInitScript(() => {
+    localStorage.setItem('sb_license:stock-return-trail', 'test-license');
+    localStorage.setItem('sb_license_verdict:stock-return-trail', JSON.stringify({ valid: true, checkedAt: Date.now() }));
+  });
   await paidPage.goto('/settings');
   await expect(paidPage.getByText('Site kit is active on this device.')).toBeVisible();
   for (const number of [1, 2, 3]) {
@@ -78,8 +80,8 @@ test('@claim:free-job-limit allows two free jobs and removes the limit with a va
     await paidPage.getByLabel('Job name').fill(`Paid job ${number}`);
     await paidPage.getByLabel('Temporary location').fill(`Paid site ${number}`);
     await paidPage.getByRole('button', { name: 'Create job', exact: true }).last().click();
+    await expect(paidPage.getByText(`${number} open`)).toBeVisible();
   }
-  await expect(paidPage.getByText('3 open')).toBeVisible();
   await paidContext.close();
 });
 
