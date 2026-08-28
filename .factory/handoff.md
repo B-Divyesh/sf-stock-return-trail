@@ -24,11 +24,11 @@
 
 ## Deployment and live verification
 
-The artifact remains a static Vite PWA. Deployment is triggered by pushing `main` through the repository’s static deployment configuration. After push, verify the live `/demo` route and `/assets/hero-topographic.avif` response header; the latter must be `Content-Type: image/avif`.
+Repair commit `a73835a` was pushed to `origin/main`. The artifact remains a static Vite PWA. Post-push checks at https://stock-return-trail.sociobot.in still served the previous `index-DIYXczTj.js` bundle and `application/octet-stream` for `/assets/hero-topographic.avif`; therefore the factory static deployment has not yet promoted this commit. The repository has no GitHub Actions deployment run, and no direct deployment credential or infrastructure configuration is in this repository. Once the factory promotion runs, verify `/demo` and confirm that the AVIF response header is `Content-Type: image/avif`.
 
 ## Known gaps / next steps
 
-No product gaps are known. The only pending step at the time this file was written is the post-push live deployment check.
+No product gaps are known. The only pending step is factory static deployment/promotion and its live identity and AVIF-header check.
 
 ## Run locally
 
