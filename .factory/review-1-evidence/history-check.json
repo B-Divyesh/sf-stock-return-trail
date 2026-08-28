@@ -1,0 +1,42 @@
+{
+  "boxes": {
+    "jobSheet": {
+      "x": 12,
+      "y": 665.328125,
+      "width": 366,
+      "height": 1786.140625
+    },
+    "routeStrip": {
+      "x": 12,
+      "y": 871.453125,
+      "width": 366,
+      "height": 77
+    },
+    "closeoutBar": {
+      "x": 12,
+      "y": 1624.453125,
+      "width": 366,
+      "height": 159.609375
+    },
+    "closeButton": {
+      "x": 32,
+      "y": 1716.0625,
+      "width": 326,
+      "height": 48
+    }
+  },
+  "viewport": {
+    "width": 390,
+    "scrollWidth": 390,
+    "bodyOverflow": "visible"
+  },
+  "routeKeyboard": {
+    "before": 0,
+    "after": 120
+  },
+  "avif": {
+    "status": 200,
+    "type": "image/avif",
+    "cache": "public, max-age=31536000, immutable"
+  }
+}

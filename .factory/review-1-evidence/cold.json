@@ -1,0 +1,267 @@
+{
+  "mobile": {
+    "status": 200,
+    "url": "https://stock-return-trail.sociobot.in/",
+    "errors": [],
+    "title": "Stock Return Trail — Return job stock to its origin",
+    "h1s": [
+      "Return job stock to the right place"
+    ],
+    "main": true,
+    "text": [
+      "Skip to main content",
+      "Stock Return Trail",
+      "Jobs",
+      "FIELD STOCK · PLOTTED HOME",
+      "Return job stock to the right place",
+      "For field teams who need each unused item sent back without searching old movement records.",
+      "Try it with sample data",
+      "Open a ready-to-close job. Nothing is saved.",
+      "Works offline after your first visit.",
+      "Your stock records stay in this browser.",
+      "Use it without an account or a job limit.",
+      "Each item keeps its origin while it is out on a job.",
+      "LIVE CLOSEOUT PREVIEW",
+      "See every return before you move it",
+      "The job sheet subtracts used stock and groups the remainder by origin.",
+      "ORIGIN",
+      "JOB",
+      "RETURN",
+      "VAL-22",
+      "Isolation valve",
+      "6 out − 2 used",
+      "4 → Bin B4",
+      "CBL-3C",
+      "3-core flex",
+      "4 out − 1 used",
+      "3 → Cable rack",
+      "Close the sample job →",
+      "THREE FIELD MARKS",
+      "How the trail works",
+      "01",
+      "Record stock out",
+      "Scan or enter a code. Add its count and store location.",
+      "02",
+      "Count what was used",
+      "At closeout, enter the used count for each stock line.",
+      "03",
+      "Return the remainder",
+      "The sheet names each origin and adds the moves to your CSV log.",
+      "A NARROW TOOL ON PURPOSE",
+      "A return trail, not an accounts system",
+      "Stock Return Trail does not price stock, place orders, or sync teams.",
+      "Movement logs help with field closeout. They are not audit-grade inventory valuation.",
+      "You can export CSV and JSON backups at any time.",
+      "Stock Return Trail",
+      "Return unused job stock to its saved origin.",
+      "Privacy",
+      "Terms",
+      "Backup",
+      "Built by Param Factory · v1.0.0",
+      "Hero artwork generated for this product."
+    ],
+    "aboveFoldText": [
+      "Stock Return Trail",
+      "Jobs",
+      "Field stock · plotted home",
+      "Return job stock to the right place",
+      "For field teams who need each unused item sent back without searching old movement records.",
+      "Try it with sample data",
+      "Open a ready-to-close job. Nothing is saved.",
+      "Works offline after your first visit.",
+      "Your stock records stay in this browser.",
+      "Use it without an account or a job limit."
+    ],
+    "links": [
+      {
+        "text": "Skip to main content",
+        "href": "https://stock-return-trail.sociobot.in/#main"
+      },
+      {
+        "text": "Stock Return Trail",
+        "href": "https://stock-return-trail.sociobot.in/"
+      },
+      {
+        "text": "Demo",
+        "href": "https://stock-return-trail.sociobot.in/demo"
+      },
+      {
+        "text": "Jobs",
+        "href": "https://stock-return-trail.sociobot.in/app"
+      },
+      {
+        "text": "Trail log",
+        "href": "https://stock-return-trail.sociobot.in/log"
+      },
+      {
+        "text": "Privacy",
+        "href": "https://stock-return-trail.sociobot.in/privacy"
+      },
+      {
+        "text": "Try it with sample data",
+        "href": "https://stock-return-trail.sociobot.in/demo"
+      },
+      {
+        "text": "Close the sample job →",
+        "href": "https://stock-return-trail.sociobot.in/demo"
+      },
+      {
+        "text": "Privacy",
+        "href": "https://stock-return-trail.sociobot.in/privacy"
+      },
+      {
+        "text": "Terms",
+        "href": "https://stock-return-trail.sociobot.in/terms"
+      },
+      {
+        "text": "Backup",
+        "href": "https://stock-return-trail.sociobot.in/settings"
+      }
+    ],
+    "buttons": [],
+    "meta": {
+      "description": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogImage": "https://stock-return-trail.sociobot.in/assets/social-card.webp",
+      "lang": "en"
+    }
+  },
+  "desktop": {
+    "status": 200,
+    "url": "https://stock-return-trail.sociobot.in/",
+    "errors": [],
+    "title": "Stock Return Trail — Return job stock to its origin",
+    "h1s": [
+      "Return job stock to the right place"
+    ],
+    "main": true,
+    "text": [
+      "Skip to main content",
+      "Stock Return Trail",
+      "Demo",
+      "Jobs",
+      "Trail log",
+      "Privacy",
+      "FIELD STOCK · PLOTTED HOME",
+      "Return job stock to the right place",
+      "For field teams who need each unused item sent back without searching old movement records.",
+      "Try it with sample data",
+      "Open a ready-to-close job. Nothing is saved.",
+      "Works offline after your first visit.",
+      "Your stock records stay in this browser.",
+      "Use it without an account or a job limit.",
+      "Each item keeps its origin while it is out on a job.",
+      "LIVE CLOSEOUT PREVIEW",
+      "See every return before you move it",
+      "The job sheet subtracts used stock and groups the remainder by origin.",
+      "ORIGIN",
+      "JOB",
+      "RETURN",
+      "VAL-22",
+      "Isolation valve",
+      "6 out − 2 used",
+      "4 → Bin B4",
+      "CBL-3C",
+      "3-core flex",
+      "4 out − 1 used",
+      "3 → Cable rack",
+      "Close the sample job →",
+      "THREE FIELD MARKS",
+      "How the trail works",
+      "01",
+      "Record stock out",
+      "Scan or enter a code. Add its count and store location.",
+      "02",
+      "Count what was used",
+      "At closeout, enter the used count for each stock line.",
+      "03",
+      "Return the remainder",
+      "The sheet names each origin and adds the moves to your CSV log.",
+      "A NARROW TOOL ON PURPOSE",
+      "A return trail, not an accounts system",
+      "Stock Return Trail does not price stock, place orders, or sync teams.",
+      "Movement logs help with field closeout. They are not audit-grade inventory valuation.",
+      "You can export CSV and JSON backups at any time.",
+      "Stock Return Trail",
+      "Return unused job stock to its saved origin.",
+      "Privacy",
+      "Terms",
+      "Backup",
+      "Built by Param Factory · v1.0.0",
+      "Hero artwork generated for this product."
+    ],
+    "aboveFoldText": [
+      "Stock Return Trail",
+      "Demo",
+      "Jobs",
+      "Trail log",
+      "Privacy",
+      "Field stock · plotted home",
+      "Return job stock to the right place",
+      "For field teams who need each unused item sent back without searching old movement records.",
+      "Try it with sample data",
+      "Open a ready-to-close job. Nothing is saved.",
+      "Works offline after your first visit.",
+      "Your stock records stay in this browser.",
+      "Use it without an account or a job limit.",
+      "Each item keeps its origin while it is out on a job."
+    ],
+    "links": [
+      {
+        "text": "Skip to main content",
+        "href": "https://stock-return-trail.sociobot.in/#main"
+      },
+      {
+        "text": "Stock Return Trail",
+        "href": "https://stock-return-trail.sociobot.in/"
+      },
+      {
+        "text": "Demo",
+        "href": "https://stock-return-trail.sociobot.in/demo"
+      },
+      {
+        "text": "Jobs",
+        "href": "https://stock-return-trail.sociobot.in/app"
+      },
+      {
+        "text": "Trail log",
+        "href": "https://stock-return-trail.sociobot.in/log"
+      },
+      {
+        "text": "Privacy",
+        "href": "https://stock-return-trail.sociobot.in/privacy"
+      },
+      {
+        "text": "Try it with sample data",
+        "href": "https://stock-return-trail.sociobot.in/demo"
+      },
+      {
+        "text": "Close the sample job →",
+        "href": "https://stock-return-trail.sociobot.in/demo"
+      },
+      {
+        "text": "Privacy",
+        "href": "https://stock-return-trail.sociobot.in/privacy"
+      },
+      {
+        "text": "Terms",
+        "href": "https://stock-return-trail.sociobot.in/terms"
+      },
+      {
+        "text": "Backup",
+        "href": "https://stock-return-trail.sociobot.in/settings"
+      }
+    ],
+    "buttons": [],
+    "meta": {
+      "description": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogImage": "https://stock-return-trail.sociobot.in/assets/social-card.webp",
+      "lang": "en"
+    }
+  }
+}

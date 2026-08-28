@@ -1,0 +1,82 @@
+[
+  {
+    "viewport": "mobile",
+    "path": "/",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/demo",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/app",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/log",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/settings",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/privacy",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/terms",
+    "violations": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/does-not-exist",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/demo",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/app",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/log",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/settings",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/privacy",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/terms",
+    "violations": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/does-not-exist",
+    "violations": []
+  }
+]

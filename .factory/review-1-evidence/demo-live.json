@@ -1,0 +1,43 @@
+{
+  "initial": {
+    "url": "https://stock-return-trail.sociobot.in/demo",
+    "title": "Demo — Stock Return Trail",
+    "h1": "Track stock out and back",
+    "banner": "Demo — sample data, nothing is saved\nReset demo\nStart for real",
+    "rows": [
+      "VAL-22\n22 mm isolation valve\n6 sent out\nMain stores · Bin B4\nUSED\nused of 6 22 mm isolation valve\n4\nto Main stores · Bin B4",
+      "CBL-3C\n3-core flex · 10 m\n4 sent out\nWorkshop · Cable rack\nUSED\nused of 4 3-core flex · 10 m\n3\nto Workshop · Cable rack",
+      "CLP-20\n20 mm pipe clips\n24 sent out\nMain stores · Bin A7\nUSED\nused of 24 20 mm pipe clips\n6\nto Main stores · Bin A7"
+    ],
+    "databases": [
+      "stock-return-trail:demo"
+    ]
+  },
+  "closed": {
+    "saved": true,
+    "movementsBeforeReset": 9
+  },
+  "reset": {
+    "open": true,
+    "closeButton": true,
+    "toast": "Demo reset to its starting job."
+  },
+  "real": {
+    "url": "https://stock-return-trail.sociobot.in/app",
+    "empty": true,
+    "bannerCount": 0,
+    "databases": [
+      "stock-return-trail:real"
+    ]
+  },
+  "controllerOnline": true,
+  "offline": {
+    "heading": "Track stock out and back",
+    "notice": true
+  },
+  "origins": [
+    "https://stock-return-trail.sociobot.in"
+  ],
+  "requestCount": 25,
+  "errors": []
+}

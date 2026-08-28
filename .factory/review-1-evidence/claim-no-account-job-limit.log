@@ -1,0 +1,30 @@
+
+> stock-return-trail@1.0.0 test
+> npm run build && playwright test --grep @claim:no-account-job-limit
+
+
+> stock-return-trail@1.0.0 build
+> tsc && vite build && node scripts/inject-sw.mjs && cp dist/index.html dist/404.html
+
+vite v6.4.3 building for production...
+transforming...
+✓ 5 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                     1.76 kB │ gzip:  0.60 kB
+dist/assets/atkinson-hyperlegible-latin-400-normal-BrHNak5F.woff2  17.21 kB
+dist/assets/atkinson-hyperlegible-latin-700-normal-GZI4o3u0.woff2  17.52 kB
+dist/assets/bitter-latin-700-normal-1jQzrEdb.woff2                 18.57 kB
+dist/assets/index-DejY7Tsb.css                                     19.99 kB │ gzip:  5.67 kB
+dist/assets/index-sEZvs4_Y.js                                      29.39 kB │ gzip: 10.25 kB │ map: 58.85 kB
+✓ built in 217ms
+[WebServer] (node:2004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+(node:2022) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2022) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+·
+  1 passed (3.2s)

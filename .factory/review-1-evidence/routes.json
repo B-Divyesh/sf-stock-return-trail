@@ -1,0 +1,639 @@
+{
+  "audits": [
+    {
+      "path": "/",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "description": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Return job stock to the right place"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Try it with sample data",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Close the sample job →",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": [
+        {
+          "src": "https://stock-return-trail.sociobot.in/assets/hero-topographic.webp",
+          "alt": "A field parts case connected to its stockroom by a red route line."
+        }
+      ]
+    },
+    {
+      "path": "/demo",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Demo — Stock Return Trail",
+      "description": "Try a ready-to-close stock return with sample data.",
+      "canonical": "https://stock-return-trail.sociobot.in/demo",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Track stock out and back"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/demo#main"
+        },
+        {
+          "text": "Start for real",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Jobs — Stock Return Trail",
+      "description": "Record stock leaving a store and close each job with returns.",
+      "canonical": "https://stock-return-trail.sociobot.in/app",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Track stock out and back"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/app#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    },
+    {
+      "path": "/log",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Movement log — Stock Return Trail",
+      "description": "Review and export your local stock movement log.",
+      "canonical": "https://stock-return-trail.sociobot.in/log",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Review the stock trail"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/log#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Open jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    },
+    {
+      "path": "/settings",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Backup — Stock Return Trail",
+      "description": "Back up and restore your local Stock Return Trail records.",
+      "canonical": "https://stock-return-trail.sociobot.in/settings",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Back up your records"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/settings#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Privacy — Stock Return Trail",
+      "description": "How Stock Return Trail stores and handles your data.",
+      "canonical": "https://stock-return-trail.sociobot.in/privacy",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Your stock records stay on your device"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/privacy#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "privacy@sociobot.in",
+          "href": "mailto:privacy@sociobot.in"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Terms — Stock Return Trail",
+      "description": "Terms for using Stock Return Trail.",
+      "canonical": "https://stock-return-trail.sociobot.in/terms",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "Use the trail as a field record"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/terms#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "support@sociobot.in",
+          "href": "mailto:support@sociobot.in"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    },
+    {
+      "path": "/does-not-exist",
+      "status": 200,
+      "errors": [],
+      "badResponses": [],
+      "title": "Page not found — Stock Return Trail",
+      "description": "Return to Stock Return Trail.",
+      "canonical": "https://stock-return-trail.sociobot.in/404",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogDescription": "Record stock sent to a job, count what was used, and return each remainder to its saved origin.",
+      "ogUrl": "https://stock-return-trail.sociobot.in/",
+      "h1": [
+        "This page is not on the trail"
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "links": [
+        {
+          "text": "Skip to main content",
+          "href": "https://stock-return-trail.sociobot.in/does-not-exist#main"
+        },
+        {
+          "text": "Stock Return Trail",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Demo",
+          "href": "https://stock-return-trail.sociobot.in/demo"
+        },
+        {
+          "text": "Jobs",
+          "href": "https://stock-return-trail.sociobot.in/app"
+        },
+        {
+          "text": "Trail log",
+          "href": "https://stock-return-trail.sociobot.in/log"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Return to the start",
+          "href": "https://stock-return-trail.sociobot.in/"
+        },
+        {
+          "text": "Privacy",
+          "href": "https://stock-return-trail.sociobot.in/privacy"
+        },
+        {
+          "text": "Terms",
+          "href": "https://stock-return-trail.sociobot.in/terms"
+        },
+        {
+          "text": "Backup",
+          "href": "https://stock-return-trail.sociobot.in/settings"
+        }
+      ],
+      "imgs": []
+    }
+  ],
+  "links": [
+    {
+      "href": "https://stock-return-trail.sociobot.in/#main",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/demo",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/app",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/log",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/privacy",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/terms",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/settings",
+      "status": 200
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/demo#main",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/app#main",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/log#main",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/settings#main",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/privacy#main",
+      "status": "exempt"
+    },
+    {
+      "href": "mailto:privacy@sociobot.in",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/terms#main",
+      "status": "exempt"
+    },
+    {
+      "href": "mailto:support@sociobot.in",
+      "status": "exempt"
+    },
+    {
+      "href": "https://stock-return-trail.sociobot.in/does-not-exist#main",
+      "status": "exempt"
+    }
+  ],
+  "history": {
+    "forward": {
+      "url": "https://stock-return-trail.sociobot.in/demo",
+      "focus": "H1:Track stock out and back"
+    },
+    "back": {
+      "url": "https://stock-return-trail.sociobot.in/",
+      "focus": "H1:Return job stock to the right place"
+    }
+  },
+  "raw": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/demo",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/log",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/settings",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    },
+    {
+      "path": "/does-not-exist",
+      "status": 200,
+      "title": "Stock Return Trail — Return job stock to its origin",
+      "canonical": "https://stock-return-trail.sociobot.in/",
+      "ogTitle": "Stock Return Trail — Return job stock to its origin",
+      "ogUrl": "https://stock-return-trail.sociobot.in/"
+    }
+  ]
+}
