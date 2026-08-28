@@ -1,0 +1,23 @@
+{
+  "name": "stock-return-trail",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && node scripts/inject-sw.mjs && cp dist/index.html dist/404.html",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "npm run build && playwright test",
+    "test:unit": "vitest run"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@fontsource/atkinson-hyperlegible": "^5.2.6",
+    "@fontsource/bitter": "^5.2.8",
+    "@playwright/test": "1.58.2",
+    "sharp-cli": "^6.0.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.8"
+  }
+}

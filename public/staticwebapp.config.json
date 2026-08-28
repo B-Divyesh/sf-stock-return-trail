@@ -1,0 +1,11 @@
+{
+  "navigationFallback": { "rewrite": "/index.html", "exclude": ["/assets/*", "/icons/*", "/*.{js,css,json,webmanifest,xml,txt}"] },
+  "responseOverrides": { "404": { "rewrite": "/404.html" } },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://api.sociobot.in; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(self), geolocation=(), microphone=()"
+  },
+  "mimeTypes": { ".webmanifest": "application/manifest+json" }
+}
