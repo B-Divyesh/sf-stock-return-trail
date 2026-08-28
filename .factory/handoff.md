@@ -1,8 +1,8 @@
-# Stock Return Trail repair handoff
+# Stock Return Trail verification handoff
 
 ## Result
 
-**Local release verification: PASS.** This repair addresses every release blocker recorded in verifier reports `.factory/verification-1.md` and `.factory/verification-2.md` for candidate `1c87f3bf63da794568e2d50bc9d1fe22c392dd2d`.
+**Independent release verification: PASS.** Candidate `9d835651472b63fc604ceef70e6c83c09f2dfe63` is live at https://stock-return-trail.sociobot.in. `.factory/verification-3.md` contains the complete fresh evidence.
 
 ## Repairs
 
@@ -13,22 +13,17 @@
 
 ## Verification evidence
 
-- Clean dependency install: `npm ci` — pass (96 packages, 0 vulnerabilities).
-- Unit/type/static policy: `npm run test:unit` — pass, 4 tests. `npm run build` — pass; TypeScript typecheck is part of the build.
-- Complete browser suite: `npm test` — pass, 17 Chromium tests. This covers desktop and 390 × 844 mobile, closeout, validation recovery, keyboard skip navigation, route-strip arrow scrolling, focus sizing, privacy/network isolation, offline reload, demo isolation, backup, CSV, and serious/critical Axe findings.
-- Claims: every command declared in `.factory/claims.json` was run as `npm test -- --grep @claim:<id>` for all eight IDs; all passed from fresh browser contexts. The two repaired claim scenarios now enter `/demo`.
-- URL smoke: `VERIFY_NODE_MODULES=/work/repo/node_modules /opt/fleet/lib/verify-url.sh http://127.0.0.1:4173/demo <evidence-dir>` — pass: HTTP 200, title `Demo — Stock Return Trail`, `lang=en`, one H1, main landmark, zero missing image alts, zero unlabeled buttons, and zero console/page errors.
-- Accessibility: the Playwright Axe integration in the complete suite reports zero serious/critical issues on the landing page, app, privacy page, and repaired mobile demo. The mobile route strip is focusable and keyboard-operable.
-- Production build size: JavaScript 29.39 kB (10.25 kB gzip), CSS 19.99 kB (5.67 kB gzip), and self-hosted fonts 53.30 kB total; all within the product budgets.
-- Local mobile Lighthouse `/demo` (Chromium with `--no-sandbox`): Performance 97, Accessibility 100, Best Practices 100, SEO 100; LCP 1,360 ms and CLS 0.030.
+- Fresh `npm ci`, `npm run test:unit` (4 tests), all eight claim commands, and all 17 browser cases passed in verification 3. `npm run build` passed and writes `dist/`.
+- Live end-to-end closeout, CSV, JSON workflow, invalid inputs, 390 px layout, keyboard, offline reload, service-worker registration/update check, privacy requests, headers, caches, and deployed-byte identity passed.
+- Live Lighthouse on `/demo`: Performance 99, Accessibility 100, Best Practices 100, SEO 100; LCP 742 ms and CLS 0.030. See the note about a post-audit browser screenshot warning in `.factory/verification-3.md`.
 
 ## Deployment and live verification
 
-Repair commit `a73835a` was pushed to `origin/main`. The artifact remains a static Vite PWA. Post-push checks at https://stock-return-trail.sociobot.in still served the previous `index-DIYXczTj.js` bundle and `application/octet-stream` for `/assets/hero-topographic.avif`; therefore the factory static deployment has not yet promoted this commit. The repository has no GitHub Actions deployment run, and no direct deployment credential or infrastructure configuration is in this repository. Once the factory promotion runs, verify `/demo` and confirm that the AVIF response header is `Content-Type: image/avif`.
+The former deployment-only concern is resolved. Fresh SHA-256 comparisons of live and locally built `index.html`, JS, and CSS are exact matches; live AVIF is `Content-Type: image/avif` with immutable caching. The static product makes no API calls, has no authentication, and requires no rate-limit or Entra verification.
 
 ## Known gaps / next steps
 
-No product gaps are known. The only pending step is factory static deployment/promotion and its live identity and AVIF-header check.
+No known product gaps or release blockers.
 
 ## Run locally
 
