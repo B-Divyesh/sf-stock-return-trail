@@ -1,0 +1,58 @@
+[
+  {
+    "id": "offline-reload",
+    "claim": "Works offline after your first visit.",
+    "where": "landing facts and README",
+    "test": "npm test -- --grep @claim:offline-reload",
+    "sandbox": "fresh browser context; open /demo online, reload once under service-worker control, set context offline, reload"
+  },
+  {
+    "id": "csv-export",
+    "claim": "Exports the movement log as CSV.",
+    "where": "landing workflow, log toolbar, and README",
+    "test": "npm test -- --grep @claim:csv-export",
+    "sandbox": "fresh /demo state; close the sample job; assert the downloaded header and all recorded movements"
+  },
+  {
+    "id": "return-provenance",
+    "claim": "Closeout subtracts used stock and records each remainder against its saved origin.",
+    "where": "landing preview and workflow",
+    "test": "npm test -- --grep @claim:return-provenance",
+    "sandbox": "fresh /demo state; assert proposed return counts and origin text, close the job, then assert nine total movements"
+  },
+  {
+    "id": "stock-code-entry",
+    "claim": "Stock codes can be entered by hand or scanned when the browser supports camera barcode detection.",
+    "where": "landing workflow, job form, and README",
+    "test": "npm test -- --grep @claim:stock-code-entry",
+    "sandbox": "fresh real workspace; exercise manual entry and a stubbed BarcodeDetector returning a known code"
+  },
+  {
+    "id": "local-records",
+    "claim": "Your stock records stay in this browser.",
+    "where": "landing facts, log heading, privacy page, and README",
+    "test": "npm test -- --grep @claim:local-records",
+    "sandbox": "fresh /demo context; observe all requests through closeout and assert every request is same-origin"
+  },
+  {
+    "id": "demo-isolation",
+    "claim": "Demo changes never touch real records.",
+    "where": "demo banner, demo documentation, and README",
+    "test": "npm test -- --grep @claim:demo-isolation",
+    "sandbox": "fresh browser context; close the demo job, switch to /app, and assert the real workspace is empty"
+  },
+  {
+    "id": "free-job-limit",
+    "claim": "The free version supports two open jobs; the £19 site kit removes the limit.",
+    "where": "landing facts, paid section, settings, and README",
+    "test": "npm test -- --grep @claim:free-job-limit",
+    "sandbox": "fresh real workspace; create two open jobs and assert a third shows the plan limit"
+  },
+  {
+    "id": "json-backup",
+    "claim": "Exports and imports all jobs and movements as a JSON backup.",
+    "where": "landing limits, settings, privacy, and README",
+    "test": "npm test -- --grep @claim:json-backup",
+    "sandbox": "fresh /demo state; download JSON, assert jobs and movements, then import that file and confirm replacement"
+  }
+]
